@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Quiz.Quiz
 {
-    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand>
+    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, QuizAggregate>
     {
         IRepository<QuizAggregate> _quizRepository;
 
@@ -14,16 +14,16 @@ namespace Application.Quiz.Quiz
             _quizRepository = repositoryFactory.Create<QuizAggregate>();
         }
 
-        public Task<Unit> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
+        public async Task<QuizAggregate> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
         {
             var quiz = new QuizAggregate
             {
                 questionOrderType = request.QuestionOrderType,
                 ThemeId = request.ThemeId,
             };
-            _quizRepository.InsertOne(quiz);
+            var quizAggregate = await _quizRepository.InsertOne(quiz);
 
-            return Unit.Task;
+            return quizAggregate;
         }
     }
 }

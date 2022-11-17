@@ -16,9 +16,10 @@ namespace Infrastructure.Quiz.Databases
             _mongoCollection = mongoCollection;
         }
 
-        public async Task InsertOne(T item)
+        public async Task<T> InsertOne(T item)
         {
             await _mongoCollection.InsertOneAsync(item);
+            return item;
         }
     }
 }

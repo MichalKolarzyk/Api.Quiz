@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Quizzes
 {
-    public class Question
+    public class AddQuestionCommand : IRequest
     {
-        public Guid Id { get; set; }
-
         public string Description { get; set; } = string.Empty;
 
         public List<string> Answers = new();

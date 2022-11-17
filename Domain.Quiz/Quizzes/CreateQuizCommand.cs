@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Quizzes
 {
-    public class CreateQuizCommand : IRequest
+    public class CreateQuizCommand : IRequest<QuizAggregate>
     {
         public string Name { get; set; } = string.Empty;
 
