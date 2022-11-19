@@ -1,4 +1,5 @@
-﻿using Infrastructure.Quiz.Databases;
+﻿using Application.Quiz.Database;
+using Infrastructure.Quiz.Databases;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -14,7 +15,7 @@ namespace Infrastructure.Quiz
             MongoClient mongoClient = new MongoClient(mongoConnectionstring);
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
             serviceCollection.AddSingleton(mongoClient);
-            serviceCollection.AddSingleton(typeof(IRepositoryFactory), new RepositoryFactory(mongoClient, databaseName));
+            serviceCollection.AddSingleton(typeof(IRepositoryFactory), new MongoDbRepositoryFactory(mongoClient, databaseName));
         }
 
     }

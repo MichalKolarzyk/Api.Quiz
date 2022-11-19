@@ -1,5 +1,5 @@
-﻿using Domain.Quiz.Quizzes;
-using Infrastructure.Quiz.Databases;
+﻿using Application.Quiz.Database;
+using Domain.Quiz.Quizzes;
 using MediatR;
 
 

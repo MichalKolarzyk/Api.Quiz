@@ -1,4 +1,5 @@
-﻿using Domain.Quiz.Abstracts;
+﻿using Application.Quiz.Database;
+using Domain.Quiz.Abstracts;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Quiz.Databases
 {
-    public interface IRepositoryFactory
-    {
-        IRepository<T> Create<T>()
-            where T : Entity;
-    }
-
-    public class RepositoryFactory : IRepositoryFactory
+    public class MongoDbRepositoryFactory : IRepositoryFactory
     {
         private readonly IMongoDatabase _database;
 
-        public RepositoryFactory(MongoClient mongoClient, string databaseName)
+        public MongoDbRepositoryFactory(MongoClient mongoClient, string databaseName)
         {
             _database = mongoClient.GetDatabase(databaseName);
         }
@@ -29,6 +24,5 @@ namespace Infrastructure.Quiz.Databases
             var colleciton = _database.GetCollection<T>(typeof(T).Name);
             return new RepositoryMongoDB<T>(colleciton);
         }
-
     }
 }

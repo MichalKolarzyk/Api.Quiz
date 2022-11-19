@@ -1,13 +1,7 @@
 ﻿using Domain.Quiz.Quizzes;
-using Infrastructure.Quiz.Databases;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Quiz.Quiz
+namespace Application.Quiz.Database
 {
     public class AddQuestionCommandHandler : IRequestHandler<AddQuestionCommand>
     {

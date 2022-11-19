@@ -2,7 +2,7 @@
 using Domain.Quiz.Abstracts;
 using System.Linq.Expressions;
 
-namespace Infrastructure.Quiz.Databases
+namespace Application.Quiz.Database
 {
     public interface IRepository<T>
         where T : Entity
