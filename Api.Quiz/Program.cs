@@ -1,4 +1,5 @@
 using Api.Quiz;
+using Api.Quiz.Middelwares;
 using Application.Quiz;
 using Domain.Quiz;
 using FluentValidation;
@@ -19,6 +20,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<AssemblyDomainQuiz>();
 
 builder.Services.AddRepositoryFactory("mongodb://localhost:27017", "QuizDatabase");
 
+builder.Services.AddScoped<ExceptionMiddleware>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,5 +36,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();

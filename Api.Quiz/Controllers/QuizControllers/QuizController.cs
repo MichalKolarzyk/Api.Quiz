@@ -1,6 +1,6 @@
-﻿using Domain.Quiz.Quizzes;
+﻿using Domain.Quiz.Abstracts;
+using Domain.Quiz.Quizzes;
 using FluentValidation;
-using Infrastructure.Quiz.Databases;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +22,10 @@ namespace Api.Quiz.Controllers.QuizControllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateQuiz([FromBody] CreateQuizCommand createQuizCommand)
         {
-            _createQuizCommandValidator.Validate(createQuizCommand, options => options.ThrowOnFailures());
+            var result = _createQuizCommandValidator.Validate(createQuizCommand);
+
+            if (!result.IsValid)
+                throw new QuizVaidationException(result);
 
             var createdQuiz = await _mediator.Send(createQuizCommand);
             return Ok(createdQuiz.Id);
@@ -38,8 +41,8 @@ namespace Api.Quiz.Controllers.QuizControllers
                 CorrectAnswerIndex = addQuestion.CorrectAnswerIndex,
                 Description = addQuestion.Description,
                 TimeoutInSeconds = addQuestion.TimeoutInSeconds,
-
             });
+
             return Ok();
         }
     }

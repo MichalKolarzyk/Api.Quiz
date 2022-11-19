@@ -22,6 +22,7 @@ namespace Domain.Quiz.Quizzes
         public CreateQuizCommandValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
+            RuleFor(c => c.Name).MinimumLength(10);
             RuleFor(c => c.ThemeId).NotEmpty();
         }
     }
