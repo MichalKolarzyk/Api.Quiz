@@ -1,7 +1,9 @@
 using Api.Quiz;
 using Application.Quiz;
 using Domain.Quiz;
+using FluentValidation;
 using Infrastructure.Quiz;
+using Infrastructure.Quiz.Databases;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(AssemblyApiQuiz.Assembly, AssemblyApplicationQuiz.Assembly, AssemblyDomainQuiz.Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<AssemblyDomainQuiz>();
 
 builder.Services.AddRepositoryFactory("mongodb://localhost:27017", "QuizDatabase");
 

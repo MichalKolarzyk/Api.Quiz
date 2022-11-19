@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,14 @@ namespace Domain.Quiz.Quizzes
         public Guid ThemeId { get; set; }
 
         public QuestionOrderType QuestionOrderType { get; set; }
+    }
+
+    public class CreateQuizCommandValidator : AbstractValidator<CreateQuizCommand>
+    {
+        public CreateQuizCommandValidator()
+        {
+            RuleFor(c => c.Name).NotEmpty();
+            RuleFor(c => c.ThemeId).NotEmpty();
+        }
     }
 }

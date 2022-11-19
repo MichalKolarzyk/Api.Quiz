@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Domain.Quiz.Abstracts;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Infrastructure.Quiz.Databases
 {
     public interface IRepositoryFactory
     {
-        IRepository<T> Create<T>();
+        IRepository<T> Create<T>()
+            where T : Entity;
     }
 
     public class RepositoryFactory : IRepositoryFactory
@@ -22,6 +24,7 @@ namespace Infrastructure.Quiz.Databases
         }
 
         public IRepository<T> Create<T>()
+            where T : Entity
         {
             var colleciton = _database.GetCollection<T>(typeof(T).Name);
             return new RepositoryMongoDB<T>(colleciton);

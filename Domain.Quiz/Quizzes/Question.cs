@@ -12,7 +12,7 @@ namespace Domain.Quiz.Quizzes
 
         public string Description { get; set; } = string.Empty;
 
-        public List<string> Answers = new();
+        public List<string> Answers { get; set; } = new();
 
         public int CorrectAnswerIndex { get; set; }
 

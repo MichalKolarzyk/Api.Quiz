@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz
 {
-    public static class AssemblyDomainQuiz
+    public class AssemblyDomainQuiz
     {
         public static Assembly Assembly { get; set; } = typeof(AssemblyDomainQuiz).Assembly;
     }
