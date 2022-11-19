@@ -16,7 +16,7 @@ namespace Application.Quiz.Exceptions
             return await Task.Run(() => new ErrorMessage
             {
                 StatusCode = 444,
-                Errors = request.ValidationResult.Errors.ToDictionary(v => v.PropertyName, v => v.ErrorMessage)
+                Errors = request.ValidationResult.Errors.GroupBy(e => e.PropertyName).ToDictionary(v => v.Key, v => v.FirstOrDefault().ErrorMessage)
             });
         }
     }

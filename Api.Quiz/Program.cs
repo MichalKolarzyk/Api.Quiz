@@ -19,8 +19,8 @@ builder.Services.AddMediatR(AssemblyApiQuiz.Assembly, AssemblyApplicationQuiz.As
 builder.Services.AddValidatorsFromAssemblyContaining<AssemblyDomainQuiz>();
 
 builder.Services.AddRepositoryFactory("mongodb://localhost:27017", "QuizDatabase");
-
 builder.Services.AddScoped<ExceptionMiddleware>();
+
 
 var app = builder.Build();
 

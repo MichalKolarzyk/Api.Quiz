@@ -23,6 +23,19 @@ namespace Api.Quiz.Middelwares
                 context.Response.StatusCode = errorMessage.StatusCode;
                 await context.Response.WriteAsJsonAsync(errorMessage);
             }
+            catch (Exception exception)
+            {
+                context.Response.StatusCode = 500;
+                await context.Response.WriteAsJsonAsync(new ErrorMessage
+                {
+                    StatusCode = 500,
+                    Errors = new Dictionary<string, string>
+                    {
+                        {"Message", exception.Message },
+                        {"StackTrace", exception.StackTrace},
+                    }
+                });
+            }
         }
     }
 }
