@@ -18,12 +18,12 @@ namespace Application.Quiz.Account
             _repository = repository;
         }
 
-        public Task<Unit> Handle(RegisterAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(RegisterAccountCommand request, CancellationToken cancellationToken)
         {
             var newUser = new AccountAggregate(request.Login, request.Password);
-            _repository.InsertOne(newUser);
-            _repository.Save();
-            return Unit.Task;
+            await _repository.InsertOne(newUser);
+            await _repository.Save();
+            return Unit.Value;
         }
     }
 }

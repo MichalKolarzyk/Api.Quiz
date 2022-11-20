@@ -40,9 +40,14 @@ namespace Infrastructure.Quiz.Databases
             return await _mongoCollection.Find<T>(expression).FirstAsync();
         }
 
+        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        {
+            return _mongoCollection.Find<T>(expression).ToEnumerable();
+        }
+
         public async Task Save()
         {
-            await Task.Run(() => _domainEventDispacher.Dispach());
+            await _domainEventDispacher.Dispach();
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Domain.Quiz.Quizzes
 
         public Guid ThemeId { get; set; }
 
+        public Guid WorkspaceId { get; set; }
+
         public QuestionOrderType questionOrderType { get; set; }
     }
 }

@@ -21,13 +21,13 @@ namespace Api.Quiz.Controllers.AccountControllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterAccountCommand registerUserCommand)
+        public async Task<IActionResult> Register([FromBody] RegisterAccountCommand registerAccountCommand)
         {
-            var result = _registerUserCommandValidator.Validate(registerUserCommand);
+            var result = _registerUserCommandValidator.Validate(registerAccountCommand);
             if (!result.IsValid)
                 throw new DomainValidationException(result);
 
-            await _mediator.Send(registerUserCommand);
+            await _mediator.Send(registerAccountCommand);
 
             return Ok();
         }

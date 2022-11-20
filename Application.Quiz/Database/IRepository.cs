@@ -10,6 +10,7 @@ namespace Application.Quiz.Database
         Task<T> InsertOne(T item);
         Task ReplaceOne(T item);
         Task<T> GetOne(Expression<Func<T, bool>> expression);
+        IEnumerable<T> Find(Expression<Func<T, bool>> expression);
         Task Save();
     }
 }

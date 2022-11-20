@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Workspaces
 {
-    public class Workspace : AggregateRoot
+    public class WorkspaceAggregate : AggregateRoot
     {
         public enum WorkspaceType
         {
@@ -16,11 +16,9 @@ namespace Domain.Quiz.Workspaces
         }
         public string Name { get; set; } = string.Empty;
 
-        public Guid OwnerUserId { get; set; }
+        public Guid OwnerUserProfileId { get; set; }
 
-        public List<Guid> UserIds { get; set; } = new();
-
-        public List<Guid> QuizIds { get; set; } = new();
+        public List<Guid> AdditionalOwners { get; set; } = new();
 
         public WorkspaceType Type { get; set; }
     }
