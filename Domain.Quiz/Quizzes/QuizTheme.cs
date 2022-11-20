@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Quiz.Themes
+namespace Domain.Quiz.Quizzes
 {
-    public class Theme
+    public class QuizTheme
     {
         public Guid Id { get; set; }
         public Color BackgroundColor { get; set; }
