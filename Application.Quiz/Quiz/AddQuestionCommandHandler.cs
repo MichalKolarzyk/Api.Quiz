@@ -7,9 +7,9 @@ namespace Application.Quiz.Database
     {
         private readonly IRepository<QuizAggregate> _quizRepository;
 
-        public AddQuestionCommandHandler(IRepositoryFactory repositoryFactory)
+        public AddQuestionCommandHandler(IRepository<QuizAggregate> quizRepository)
         {
-            _quizRepository = repositoryFactory.Create<QuizAggregate>();
+            _quizRepository = quizRepository;
         }
 
         public async Task<Unit> Handle(AddQuestionCommand request, CancellationToken cancellationToken)

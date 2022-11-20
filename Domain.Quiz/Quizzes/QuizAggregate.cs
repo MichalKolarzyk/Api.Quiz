@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Quizzes
 {
-    public class QuizAggregate : Entity
+    public class QuizAggregate : AggregateRoot
     {
         public List<Question> Questions { get; set; } = new();
 

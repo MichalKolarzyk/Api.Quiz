@@ -13,9 +13,9 @@ namespace Application.Quiz.Users
     {
         IRepository<UserAggregate> _userRepository;
 
-        public LoginUserCommandHandler(IRepositoryFactory repositoryFactory)
+        public LoginUserCommandHandler(IRepository<UserAggregate> userRepository)
         {
-            _userRepository = repositoryFactory.Create<UserAggregate>();
+            _userRepository = userRepository;
         }
 
         public async Task<LoginUserResponse> Handle(LoginUserCommand request, CancellationToken cancellationToken)

@@ -7,6 +7,8 @@ using Infrastructure.Quiz;
 using Infrastructure.Quiz.Databases;
 using MediatR;
 
+var settings = new ApiQuizSettings();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,7 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(AssemblyApiQuiz.Assembly, AssemblyApplicationQuiz.Assembly, AssemblyDomainQuiz.Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<AssemblyDomainQuiz>();
 
-builder.Services.AddRepositoryFactory("mongodb://localhost:27017", "QuizDatabase");
+builder.Services.AddMongoRepository(settings);
 builder.Services.AddScoped<ExceptionMiddleware>();
 
 

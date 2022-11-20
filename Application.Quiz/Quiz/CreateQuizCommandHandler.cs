@@ -9,9 +9,9 @@ namespace Application.Quiz.Quiz
     {
         IRepository<QuizAggregate> _quizRepository;
 
-        public CreateQuizCommandHandler(IRepositoryFactory repositoryFactory)
+        public CreateQuizCommandHandler(IRepository<QuizAggregate> quizRepository)
         {
-            _quizRepository = repositoryFactory.Create<QuizAggregate>();
+            _quizRepository = quizRepository;
         }
 
         public async Task<QuizAggregate> Handle(CreateQuizCommand request, CancellationToken cancellationToken)

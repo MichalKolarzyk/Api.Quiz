@@ -11,18 +11,22 @@ using Application.Quiz.Database;
 namespace Infrastructure.Quiz.Databases
 {
     public class RepositoryMongoDB<T> : IRepository<T>
-        where T : Entity
+        where T : AggregateRoot
     {
         private readonly IMongoCollection<T> _mongoCollection;
+        private readonly IDomainEventDispacher _domainEventDispacher;
 
-        public RepositoryMongoDB(IMongoCollection<T> mongoCollection)
+        public RepositoryMongoDB(MongoClient mongoClient, IMongoRepositorySettings mongoRepositorySettings, IDomainEventDispacher domainEventDispacher)
         {
-            _mongoCollection = mongoCollection;
+            var database = mongoClient.GetDatabase(mongoRepositorySettings.MongoDatabase);
+            _mongoCollection = database.GetCollection<T>(typeof(T).Name);
+            _domainEventDispacher = domainEventDispacher;
         }
 
         public async Task<T> InsertOne(T item)
         {
             await _mongoCollection.InsertOneAsync(item);
+            _domainEventDispacher.AddAggregate(item);
             return item;
         }
 
@@ -34,6 +38,11 @@ namespace Infrastructure.Quiz.Databases
         public async Task<T> GetOne(Expression<Func<T,bool>> expression)
         {
             return await _mongoCollection.Find<T>(expression).FirstAsync();
+        }
+
+        public async Task Save()
+        {
+            await Task.Run(() => _domainEventDispacher.Dispach());
         }
     }
 }

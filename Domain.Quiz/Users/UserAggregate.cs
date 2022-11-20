@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Users
 {
-    public class UserAggregate : Entity
+    public class UserAggregate : AggregateRoot
     {
         public string Login { get; set; } = string.Empty;
 
         public string HashPassword { get; set; } = string.Empty;
+
+        public UserAggregate(string login, string hashPassword)
+        {
+            Login = login;
+            HashPassword = hashPassword;
+            Id = Guid.NewGuid();
+
+            AddDomainEvent(new CreateNewUserDomainEvent(Id));
+        }
     }
 }
