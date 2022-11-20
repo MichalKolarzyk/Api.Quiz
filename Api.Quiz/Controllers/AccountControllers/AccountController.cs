@@ -1,27 +1,27 @@
 ﻿using Domain.Quiz.Exceptions;
 using Domain.Quiz.Quizzes;
-using Domain.Quiz.Users;
+using Domain.Quiz.Account;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Quiz.Controllers.UserControllers
+namespace Api.Quiz.Controllers.AccountControllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IValidator<RegisterUserCommand> _registerUserCommandValidator;
+        private readonly IValidator<RegisterAccountCommand> _registerUserCommandValidator;
 
-        public UserController(IMediator mediator, IValidator<RegisterUserCommand> registerUserCommandValidator)
+        public AccountController(IMediator mediator, IValidator<RegisterAccountCommand> registerUserCommandValidator)
         {
             _mediator = mediator;
             _registerUserCommandValidator = registerUserCommandValidator;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommand registerUserCommand)
+        public async Task<IActionResult> Register([FromBody] RegisterAccountCommand registerUserCommand)
         {
             var result = _registerUserCommandValidator.Validate(registerUserCommand);
             if (!result.IsValid)
@@ -33,7 +33,7 @@ namespace Api.Quiz.Controllers.UserControllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<LoginUserResponse>> Login([FromBody] LoginUserCommand loginUserCommand)
+        public async Task<ActionResult<LoginToAccountResponse>> Login([FromBody] LoginToAccountCommand loginUserCommand)
         {
             var loginResult = await _mediator.Send(loginUserCommand);
 

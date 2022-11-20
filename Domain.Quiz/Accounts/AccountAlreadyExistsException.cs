@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Quiz.Users
+namespace Domain.Quiz.Account
 {
-    public class UserAlreadyExistsException : DomainException
+    public class AccountAlreadyExistsException : DomainException
     {
     }
 }

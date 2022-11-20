@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Quiz.Users
+namespace Domain.Quiz.Account
 {
-    public class CreateNewUserDomainEvent : DomainEvent
+    public class CreateNewAccountDomainEvent : DomainEvent
     {
         public Guid UserId { get; set; }
 
-        public CreateNewUserDomainEvent(Guid userId)
+        public CreateNewAccountDomainEvent(Guid userId)
         {
             UserId = userId;
         }

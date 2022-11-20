@@ -1,20 +1,20 @@
 ﻿using Application.Quiz.Database;
-using Domain.Quiz.Users;
+using Domain.Quiz.Account;
 using Domain.Quiz.Workspaces;
 using MediatR;
 
-namespace Application.Quiz.Users
+namespace Application.Quiz.Account
 {
-    public class CreateNewUserDomainEventHandler : INotificationHandler<CreateNewUserDomainEvent>
+    public class CreateNewAccountDomainEventHandler : INotificationHandler<CreateNewAccountDomainEvent>
     {
         private readonly IRepository<Workspace> _repository;
 
-        public CreateNewUserDomainEventHandler(IRepository<Workspace> repository)
+        public CreateNewAccountDomainEventHandler(IRepository<Workspace> repository)
         {
             _repository = repository;
         }
 
-        public async Task Handle(CreateNewUserDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(CreateNewAccountDomainEvent notification, CancellationToken cancellationToken)
         {
             var workspace = new Workspace
             {

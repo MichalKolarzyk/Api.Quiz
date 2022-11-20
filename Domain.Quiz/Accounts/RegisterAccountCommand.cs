@@ -6,16 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Quiz.Users
+namespace Domain.Quiz.Account
 {
-    public class RegisterUserCommand : IRequest
+    public class RegisterAccountCommand : IRequest
     {
         public string Login { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
     }
 
-    public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
+    public class RegisterUserCommandValidator : AbstractValidator<RegisterAccountCommand>
     {
         public RegisterUserCommandValidator()
         {
