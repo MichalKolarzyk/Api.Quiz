@@ -19,7 +19,7 @@ namespace Application.Quiz.Account
 
         public async Task Handle(CreateNewAccountDomainEvent notification, CancellationToken cancellationToken)
         {
-            var userProfile = new UserProfileAggregate(notification.AccountId);
+            var userProfile = new UserProfileAggregate(notification.AccountId, notification.Login);
             await _userProfileRepository.InsertOne(userProfile);
 
             var workspace = new WorkspaceAggregate("New aggregate", userProfile.Id, WorkspaceAggregate.WorkspaceType.Private);

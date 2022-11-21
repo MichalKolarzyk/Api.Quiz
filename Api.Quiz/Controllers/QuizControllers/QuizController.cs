@@ -1,4 +1,4 @@
-﻿using Domain.Quiz.Abstracts;
+﻿using Domain.Quiz.Exceptions;
 using Domain.Quiz.Quizzes;
 using FluentValidation;
 using MediatR;
@@ -25,7 +25,7 @@ namespace Api.Quiz.Controllers.QuizControllers
             var result = _createQuizCommandValidator.Validate(createQuizCommand);
 
             if (!result.IsValid)
-                throw new QuizVaidationException(result);
+                throw new DomainValidationException(result);
 
             var createdQuiz = await _mediator.Send(createQuizCommand);
             return Ok(createdQuiz.Id);

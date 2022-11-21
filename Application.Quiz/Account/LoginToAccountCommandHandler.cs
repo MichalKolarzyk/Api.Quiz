@@ -1,4 +1,5 @@
-﻿using Application.Quiz.Database;
+﻿using Application.Quiz.Authentications;
+using Application.Quiz.Database;
 using Domain.Quiz.Account;
 using MediatR;
 using System;
@@ -12,22 +13,27 @@ namespace Application.Quiz.Account
     internal class LoginToAccountCommandHandler : IRequestHandler<LoginToAccountCommand, LoginToAccountResponse>
     {
         IRepository<AccountAggregate> _userRepository;
+        IAuthenticationTokenService _authenticationTokenService;
 
-        public LoginToAccountCommandHandler(IRepository<AccountAggregate> userRepository)
+        public LoginToAccountCommandHandler(IRepository<AccountAggregate> userRepository, IAuthenticationTokenService authenticationTokenService)
         {
             _userRepository = userRepository;
+            _authenticationTokenService = authenticationTokenService;
         }
 
         public async Task<LoginToAccountResponse> Handle(LoginToAccountCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetOne(u => u.Login == request.Login);
-            if (user != null)
-                throw new AccountAlreadyExistsException();
+
+            var token = _authenticationTokenService.GenerateToken(new GenerateTokenData
+            {
+                Name = user.Login,
+                NameIdentifier = user.Id.ToString(),
+            });
 
             return new LoginToAccountResponse
             {
-                Succeed = true,
-                Token = "Token",
+                Token = token
             };
         }
     }

@@ -19,7 +19,7 @@ namespace Domain.Quiz.Account
             HashPassword = hashPassword;
             Id = Guid.NewGuid();
 
-            AddDomainEvent(new CreateNewAccountDomainEvent(Id));
+            AddDomainEvent(new CreateNewAccountDomainEvent(Id, login));
         }
     }
 }

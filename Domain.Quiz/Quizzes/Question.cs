@@ -15,7 +15,5 @@ namespace Domain.Quiz.Quizzes
         public List<string> Answers { get; set; } = new();
 
         public int CorrectAnswerIndex { get; set; }
-
-        public int TimeoutInSeconds { get; set; }
     }
 }

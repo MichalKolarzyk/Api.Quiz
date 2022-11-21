@@ -20,7 +20,6 @@ namespace Application.Quiz.Database
                 Id = Guid.NewGuid(),
                 CorrectAnswerIndex = request.CorrectAnswerIndex,
                 Description = request.Description,
-                TimeoutInSeconds = request.TimeoutInSeconds,
                 Answers = request.Answers,
             });
 

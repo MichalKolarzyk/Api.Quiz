@@ -11,12 +11,14 @@ namespace Domain.Quiz.UserProfile
     {
         public Guid AccountId { get; set; }
         public string Image { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
         public List<UserProfileWorkspace> UserProfileWorkspaces { get; set; } = new List<UserProfileWorkspace>();
 
-        public UserProfileAggregate(Guid accountId)
+        public UserProfileAggregate(Guid accountId, string userName)
         {
             AccountId = accountId;
             Id = Guid.NewGuid();
+            UserName = userName;
             AddDomainEvent(new CreateUserProfileDomainEvent { UserProfileId = Id});
         }
 

@@ -10,10 +10,13 @@ namespace Domain.Quiz.Account
     public class CreateNewAccountDomainEvent : DomainEvent
     {
         public Guid AccountId { get; set; }
+        public string Login { get; set; }
 
-        public CreateNewAccountDomainEvent(Guid userId)
+        public CreateNewAccountDomainEvent(Guid userId, string login)
         {
             AccountId = userId;
+            Login = login;
+
         }
     }
 }

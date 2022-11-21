@@ -12,18 +12,19 @@ namespace Domain.Quiz.Quizzes
     {
         public string Name { get; set; } = string.Empty;
 
-        public Guid ThemeId { get; set; }
+        public Guid WorkspaceId { get; set; }
 
-        public QuestionOrderType QuestionOrderType { get; set; }
+        public Guid ThemeId { get; set; }
     }
 
     public class CreateQuizCommandValidator : AbstractValidator<CreateQuizCommand>
     {
         public CreateQuizCommandValidator()
         {
-            RuleFor(c => c.Name).NotEmpty();
-            RuleFor(c => c.Name).MinimumLength(10);
-            RuleFor(c => c.ThemeId).NotEmpty();
+            RuleFor(q => q.Name).NotEmpty();
+            RuleFor(q => q.Name).MinimumLength(10);
+            RuleFor(q => q.ThemeId).NotEmpty();
+            RuleFor(q => q.WorkspaceId).NotEmpty();
         }
     }
 }

@@ -16,11 +16,8 @@ namespace Application.Quiz.Quiz
 
         public async Task<QuizAggregate> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
         {
-            var quiz = new QuizAggregate
-            {
-                questionOrderType = request.QuestionOrderType,
-                ThemeId = request.ThemeId,
-            };
+            var quiz = new QuizAggregate(request.ThemeId, request.WorkspaceId);
+
             var quizAggregate = await _quizRepository.InsertOne(quiz);
 
             return quizAggregate;

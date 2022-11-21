@@ -38,7 +38,7 @@ namespace Infrastructure.Quiz.Databases
 
         public async Task<T> GetOne(Expression<Func<T,bool>> expression)
         {
-            return await _mongoCollection.Find<T>(expression).FirstAsync();
+            return await _mongoCollection.Find<T>(expression).FirstOrDefaultAsync();
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)

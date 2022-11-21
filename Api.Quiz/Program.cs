@@ -1,5 +1,6 @@
 using Api.Quiz;
 using Api.Quiz.Middelwares;
+using Api.Quiz.Services;
 using Application.Quiz;
 using Domain.Quiz;
 using FluentValidation;
@@ -10,7 +11,6 @@ using MediatR;
 var settings = new ApiQuizSettings();
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -21,6 +21,10 @@ builder.Services.AddMediatR(AssemblyApiQuiz.Assembly, AssemblyApplicationQuiz.As
 builder.Services.AddValidatorsFromAssemblyContaining<AssemblyDomainQuiz>();
 
 builder.Services.AddMongoRepository(settings);
+builder.Services.AddJwtTokenAuthentication(settings);
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<HttpContextService>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
 
@@ -34,7 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
