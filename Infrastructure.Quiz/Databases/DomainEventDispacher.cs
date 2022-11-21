@@ -10,8 +10,7 @@ namespace Infrastructure.Quiz.Databases
 {
     public interface IDomainEventDispacher
     {
-        void AddAggregate(AggregateRoot aggregateRoot);
-        Task Dispach();
+        Task Dispach(AggregateRoot aggregateRoot);
     }
 
     public class DomainEventDispacher : IDomainEventDispacher
@@ -24,16 +23,9 @@ namespace Infrastructure.Quiz.Databases
             _mediator = mediator;
         }
 
-
-        public void AddAggregate(AggregateRoot aggregateRoot)
+        public async Task Dispach(AggregateRoot aggregateRoot)
         {
-            _aggregateRoots.Add(aggregateRoot);
-        }
-
-        public async Task Dispach()
-        {
-            var domainEvents = _aggregateRoots.SelectMany(a => a.GetDomainEvents());
-            foreach (var domainEvent in domainEvents)
+            foreach (var domainEvent in aggregateRoot.GetDomainEvents())
             {
                 await _mediator.Publish(domainEvent);
             }

@@ -26,13 +26,14 @@ namespace Infrastructure.Quiz.Databases
         public async Task<T> InsertOne(T item)
         {
             await _mongoCollection.InsertOneAsync(item);
-            _domainEventDispacher.AddAggregate(item);
+            await _domainEventDispacher.Dispach(item);
             return item;
         }
 
         public async Task ReplaceOne(T item)
         {
             await _mongoCollection.ReplaceOneAsync<T>((itemToReplace) => itemToReplace.Id == item.Id, item);
+            await _domainEventDispacher.Dispach(item);
         }
 
         public async Task<T> GetOne(Expression<Func<T,bool>> expression)
@@ -43,11 +44,6 @@ namespace Infrastructure.Quiz.Databases
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
         {
             return _mongoCollection.Find<T>(expression).ToEnumerable();
-        }
-
-        public async Task Save()
-        {
-            await _domainEventDispacher.Dispach();
         }
     }
 }

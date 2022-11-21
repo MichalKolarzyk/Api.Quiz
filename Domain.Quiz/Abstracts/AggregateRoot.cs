@@ -15,8 +15,10 @@ namespace Domain.Quiz.Abstracts
             _domainEvents.Add(domainEvent);
         }
 
-        public IEnumerable<DomainEvent> GetDomainEvents()
+        public List<DomainEvent> GetDomainEvents()
         {
+            if (_domainEvents == null)
+                return new List<DomainEvent>();
             return _domainEvents;
         }
     }

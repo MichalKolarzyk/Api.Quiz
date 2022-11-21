@@ -22,7 +22,6 @@ namespace Application.Quiz.Account
         {
             var newUser = new AccountAggregate(request.Login, request.Password);
             await _repository.InsertOne(newUser);
-            await _repository.Save();
             return Unit.Value;
         }
     }

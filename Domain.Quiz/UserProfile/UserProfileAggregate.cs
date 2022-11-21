@@ -9,15 +9,20 @@ namespace Domain.Quiz.UserProfile
 {
     public class UserProfileAggregate : AggregateRoot
     {
+        public Guid AccountId { get; set; }
+        public string Image { get; set; } = string.Empty;
+        public List<UserProfileWorkspace> UserProfileWorkspaces { get; set; } = new List<UserProfileWorkspace>();
+
         public UserProfileAggregate(Guid accountId)
         {
             AccountId = accountId;
             Id = Guid.NewGuid();
-
             AddDomainEvent(new CreateUserProfileDomainEvent { UserProfileId = Id});
-        }   
+        }
 
-        public Guid AccountId { get; set; }
-        public string Image { get; set; } = string.Empty;
+        public void AddWorkspace(UserProfileWorkspace userProfileWorkspace)
+        {
+            UserProfileWorkspaces.Add(userProfileWorkspace);
+        }
     }
 }
