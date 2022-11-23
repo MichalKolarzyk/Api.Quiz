@@ -2,6 +2,8 @@ using Api.Quiz;
 using Api.Quiz.Middelwares;
 using Api.Quiz.Services;
 using Application.Quiz;
+using BaseImplementationLib;
+using BaseImplementationLib.RabbitMq;
 using Domain.Quiz;
 using FluentValidation;
 using Infrastructure.Quiz;
@@ -27,8 +29,13 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<HttpContextService>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
+builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange"});
+builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "Queue" });
+
 
 var app = builder.Build();
+
+app.UseMq();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
