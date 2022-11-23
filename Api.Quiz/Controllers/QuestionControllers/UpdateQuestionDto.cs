@@ -1,6 +1,6 @@
 ﻿namespace Api.Quiz.Controllers.QuestionControllers
 {
-    public class CreateQuestionDto
+    public class UpdateQuestionDto
     {
         public Guid WorkspaceId { get; set; }
 

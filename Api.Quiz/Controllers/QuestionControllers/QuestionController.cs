@@ -28,5 +28,20 @@ namespace Api.Quiz.Controllers.QuestionControllers
 
             return Ok();
         }
+
+        [HttpPut("{questionId}/update")]
+        public async Task<IActionResult> Update([FromRoute] Guid questionId, [FromBody] UpdateQuestionDto createQuestion)
+        {
+            await _mediator.Send(new UpdateQuestionCommand
+            {
+                Id = questionId,
+                WorkspaceId = createQuestion.WorkspaceId,
+                Answers = createQuestion.Answers,
+                CorrectAnswerIndex = createQuestion.CorrectAnswerIndex,
+                Description = createQuestion.Description,
+            });
+
+            return Ok();
+        }
     }
 }

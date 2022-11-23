@@ -24,5 +24,21 @@ namespace Domain.Quiz.Questions
             Answers = answers;
             CorrectAnswerIndex = correctAnswerIndex;
         }
+
+        public void ChangeDescription(string description)
+        {
+            Description = description;
+        }
+
+        public void ChangeAnswers(List<string> answers, int correctAnswerIndex)
+        {
+            Answers = answers;
+            CorrectAnswerIndex = correctAnswerIndex;
+        }
+
+        public void ChangeWorkspace(Guid workspaceId)
+        {
+            WorkspaceId = workspaceId;
+        }
     }
 }
