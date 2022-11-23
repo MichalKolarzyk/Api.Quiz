@@ -23,25 +23,25 @@ namespace Infrastructure.Quiz.Databases
             _domainEventDispacher = domainEventDispacher;
         }
 
-        public async Task<T> InsertOne(T item)
+        public async Task<T> InsertAsync(T item)
         {
             await _mongoCollection.InsertOneAsync(item);
             await _domainEventDispacher.Dispach(item);
             return item;
         }
 
-        public async Task ReplaceOne(T item)
+        public async Task UpdateAsync(T item)
         {
             await _mongoCollection.ReplaceOneAsync<T>((itemToReplace) => itemToReplace.Id == item.Id, item);
             await _domainEventDispacher.Dispach(item);
         }
 
-        public async Task<T> GetOne(Expression<Func<T,bool>> expression)
+        public async Task<T> GetAsync(Expression<Func<T,bool>> expression)
         {
             return await _mongoCollection.Find<T>(expression).FirstOrDefaultAsync();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        public IEnumerable<T> Get(Expression<Func<T, bool>> expression)
         {
             return _mongoCollection.Find<T>(expression).ToEnumerable();
         }

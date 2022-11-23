@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Quiz.UserProfile
+namespace Application.Quiz.UserProfiles
 {
     public class GetUserProfileCommand : IRequest<GetUserProfileResponse>
     {

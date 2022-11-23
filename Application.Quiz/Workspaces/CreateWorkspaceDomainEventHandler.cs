@@ -22,14 +22,14 @@ namespace Application.Quiz.Workspaces
 
         public async Task Handle(CreateWorkspaceDomainEvent notification, CancellationToken cancellationToken)
         {
-            var userProfile = await _userProfileWorkspace.GetOne(p => p.Id == notification.OwnerUserProfileId);
+            var userProfile = await _userProfileWorkspace.GetAsync(p => p.Id == notification.OwnerUserProfileId);
             userProfile.AddWorkspace(new UserProfileWorkspace
             {
                 Name = notification.Name,
                 WorkspaceId = notification.WorkspaceId,
             });
 
-            await _userProfileWorkspace.ReplaceOne(userProfile);
+            await _userProfileWorkspace.UpdateAsync(userProfile);
         }
     }
 }

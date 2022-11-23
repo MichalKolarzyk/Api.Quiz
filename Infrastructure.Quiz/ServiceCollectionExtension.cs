@@ -17,6 +17,7 @@ namespace Infrastructure.Quiz
         public static void AddMongoRepository(this IServiceCollection serviceCollection, IMongoRepositorySettings mongoRepositorySettings)
         {
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+            BsonSerializer.RegisterSerializer(new DateTimeSerializer(BsonType.DateTime));
 
             serviceCollection.AddScoped<MongoClient>(provider => new MongoClient(mongoRepositorySettings.MongoConnectionString));
             serviceCollection.AddSingleton<IMongoRepositorySettings>(mongoRepositorySettings);

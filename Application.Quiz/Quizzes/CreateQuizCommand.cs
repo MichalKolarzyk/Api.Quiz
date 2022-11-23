@@ -1,12 +1,8 @@
-﻿using FluentValidation;
+﻿using Domain.Quiz.Quizzes;
+using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Domain.Quiz.Quizzes
+namespace Application.Quiz.Quizzes
 {
     public class CreateQuizCommand : IRequest<QuizAggregate>
     {

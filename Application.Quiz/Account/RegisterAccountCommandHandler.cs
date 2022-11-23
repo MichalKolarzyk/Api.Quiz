@@ -21,7 +21,7 @@ namespace Application.Quiz.Account
         public async Task<Unit> Handle(RegisterAccountCommand request, CancellationToken cancellationToken)
         {
             var newUser = new AccountAggregate(request.Login, request.Password);
-            await _repository.InsertOne(newUser);
+            await _repository.InsertAsync(newUser);
             return Unit.Value;
         }
     }

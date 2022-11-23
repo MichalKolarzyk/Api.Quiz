@@ -25,7 +25,7 @@ namespace Api.Quiz.Controllers.UserProfileControllers
         {
             var userProfileId = _contextService.GetAccountId();
 
-            var userProfile = await _repository.GetOne(u => u.AccountId == userProfileId);
+            var userProfile = await _repository.GetAsync(u => u.AccountId == userProfileId);
 
             return userProfile;
         }

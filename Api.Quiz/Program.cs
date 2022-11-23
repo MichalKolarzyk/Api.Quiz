@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(AssemblyApiQuiz.Assembly, AssemblyApplicationQuiz.Assembly, AssemblyDomainQuiz.Assembly);
-builder.Services.AddValidatorsFromAssemblyContaining<AssemblyDomainQuiz>();
+builder.Services.AddValidatorsFromAssemblyContaining<AssemblyApplicationQuiz>();
 
 builder.Services.AddMongoRepository(settings);
 builder.Services.AddJwtTokenAuthentication(settings);

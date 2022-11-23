@@ -6,22 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Quiz.Quizzes
+namespace Application.Quiz.Questions
 {
-    public class AddQuestionCommand : IRequest
+    public class CreateQuestionCommand : IRequest
     {
-        public Guid QuizId { get; set; }
+        public Guid WorkspaceId { get; set; }
 
         public string Description { get; set; } = string.Empty;
 
         public List<string> Answers { get; set; } = new();
 
         public int CorrectAnswerIndex { get; set; }
-
-        public int TimeoutInSeconds { get; set; }
     }
 
-    public class AddQuestionCommandValidator : AbstractValidator<AddQuestionCommand>
+    public class AddQuestionCommandValidator : AbstractValidator<CreateQuestionCommand>
     {
         public AddQuestionCommandValidator()
         {

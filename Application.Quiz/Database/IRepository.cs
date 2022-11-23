@@ -7,9 +7,9 @@ namespace Application.Quiz.Database
     public interface IRepository<T> 
         where T : AggregateRoot
     {
-        Task<T> InsertOne(T item);
-        Task ReplaceOne(T item);
-        Task<T> GetOne(Expression<Func<T, bool>> expression);
-        IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+        Task<T> InsertAsync(T item);
+        Task UpdateAsync(T item);
+        Task<T> GetAsync(Expression<Func<T, bool>> expression);
+        IEnumerable<T> Get(Expression<Func<T, bool>> expression);
     }
 }

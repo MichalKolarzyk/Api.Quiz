@@ -16,10 +16,15 @@ namespace Domain.Quiz.Quizzes
             WorkspaceId = workspaceId;
         }
 
-        public List<Question> Questions { get; set; } = new();
+        public List<Guid> QuestionIds { get; set; } = new();
 
         public Guid ThemeId { get; set; }
 
         public Guid WorkspaceId { get; set; }
+
+        public void UpdateQuestions(List<Guid> questionIds)
+        {
+            QuestionIds = questionIds;
+        }
     }
 }

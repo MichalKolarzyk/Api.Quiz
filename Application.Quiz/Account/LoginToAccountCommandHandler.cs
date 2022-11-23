@@ -23,7 +23,7 @@ namespace Application.Quiz.Account
 
         public async Task<LoginToAccountResponse> Handle(LoginToAccountCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetOne(u => u.Login == request.Login);
+            var user = await _userRepository.GetAsync(u => u.Login == request.Login);
 
             var token = _authenticationTokenService.GenerateToken(new GenerateTokenData
             {

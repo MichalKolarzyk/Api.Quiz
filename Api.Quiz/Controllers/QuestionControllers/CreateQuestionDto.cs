@@ -1,7 +1,9 @@
-﻿namespace Api.Quiz.Controllers.QuizControllers
+﻿namespace Api.Quiz.Controllers.QuestionControllers
 {
-    public class AddQuestion
+    public class CreateQuestionDto
     {
+        public Guid WorkspaceId { get; set; }
+
         public string Description { get; set; } = string.Empty;
 
         public List<string> Answers { get; set; } = new List<string>();

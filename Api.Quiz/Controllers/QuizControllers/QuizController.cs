@@ -1,4 +1,5 @@
-﻿using Domain.Quiz.Exceptions;
+﻿using Application.Quiz.Quizzes;
+using Domain.Quiz.Exceptions;
 using Domain.Quiz.Quizzes;
 using FluentValidation;
 using MediatR;
@@ -31,19 +32,22 @@ namespace Api.Quiz.Controllers.QuizControllers
             return Ok(createdQuiz.Id);
         }
 
-        [HttpPost("{quizId}/addQuestion")]
-        public async Task<IActionResult> AddQuestion([FromRoute] Guid quizId, [FromBody] AddQuestion addQuestion)
+        [HttpPut("{quizId}/update")]
+        public async Task<IActionResult> Update([FromRoute] Guid quizId, [FromBody] UpdateQuizDto updateQuizDto)
         {
-            await _mediator.Send(new AddQuestionCommand
+            await _mediator.Send(new UpdateQuizCommand
             {
                 QuizId = quizId,
-                Answers = addQuestion.Answers,
-                CorrectAnswerIndex = addQuestion.CorrectAnswerIndex,
-                Description = addQuestion.Description,
-                TimeoutInSeconds = addQuestion.TimeoutInSeconds,
+                QuestionIds = updateQuizDto.QuestionIds,
             });
 
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<GetQuizesResponse>> GetQuizes([FromQuery] GetQuizesCommand getQuizesCommand)
+        {
+            return await _mediator.Send(getQuizesCommand);
         }
     }
 }

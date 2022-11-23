@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Abstracts
 {
-    public class AggregateRoot : Entity
+    public abstract class AggregateRoot : Entity
     {
         private readonly List<DomainEvent> _domainEvents = new List<DomainEvent>();
 

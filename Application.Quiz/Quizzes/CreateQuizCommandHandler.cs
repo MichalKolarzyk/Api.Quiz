@@ -3,7 +3,7 @@ using Domain.Quiz.Quizzes;
 using MediatR;
 
 
-namespace Application.Quiz.Quiz
+namespace Application.Quiz.Quizzes
 {
     public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, QuizAggregate>
     {
@@ -18,7 +18,7 @@ namespace Application.Quiz.Quiz
         {
             var quiz = new QuizAggregate(request.ThemeId, request.WorkspaceId);
 
-            var quizAggregate = await _quizRepository.InsertOne(quiz);
+            var quizAggregate = await _quizRepository.InsertAsync(quiz);
 
             return quizAggregate;
         }

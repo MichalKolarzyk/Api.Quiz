@@ -1,9 +1,8 @@
 ﻿using Domain.Quiz.Exceptions;
-using Domain.Quiz.Quizzes;
-using Domain.Quiz.Account;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Application.Quiz.Account;
 
 namespace Api.Quiz.Controllers.AccountControllers
 {
