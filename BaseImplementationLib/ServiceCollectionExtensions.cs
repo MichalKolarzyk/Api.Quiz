@@ -21,9 +21,10 @@ namespace BaseImplementationLib
             services.AddSingleton(typeof(ProducerBase<>));
         }
 
-        public static void RegisterMqConsumer(this IServiceCollection services, IMqConsumer messageConsumer)
+        public static void RegisterMqConsumer<TConsumer>(this IServiceCollection services)
+            where TConsumer : class, IMqConsumer
         {
-            services.AddSingleton<IMqConsumer>(messageConsumer);
+            services.AddScoped<IMqConsumer, TConsumer>();
         }
 
         public static void RegisterMqQueue(this IServiceCollection services, MqQueue queue)

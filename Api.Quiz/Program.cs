@@ -29,6 +29,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<HttpContextService>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
+builder.Services.ReqisterMessageQueue(settings);
 builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange"});
 builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "Queue" });
 

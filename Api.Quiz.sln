@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mq.AppEventScheduler", "Mq.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseImplementationLib", "BaseImplementationLib\BaseImplementationLib.csproj", "{8DDA7A4C-35BA-4A1C-B00E-1CEA8392465E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QuizGateway", "QuizGateway", "{C365FAF3-C41F-4BD0-896D-83AF8B2579E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppEventScheduler", "AppEventScheduler", "{A2D8C5CE-0692-49E1-8FC4-69A6BBC6DD0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B921C628-BDBC-4CEF-BE3A-C871DA26E769} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
+		{F6FCFB50-7071-435E-BAA9-F67609628941} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
+		{571FAD34-CD1E-4936-831D-D4C1EC98AC22} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
+		{64671A96-F32F-4C30-80D8-2017240C0663} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
+		{531217E2-3F15-41C8-913F-E14BEE552F45} = {A2D8C5CE-0692-49E1-8FC4-69A6BBC6DD0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A94BEE7-0D56-4DFA-892A-199F1AD7C267}
