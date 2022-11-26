@@ -1,4 +1,5 @@
 ﻿using Domain.Quiz.Abstracts;
+using Domain.Quiz.QuizSession.DomainEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +16,17 @@ namespace Domain.Quiz.QuizSession
         public DateTime ActualStartTime { get; set; }
         public DateTime FinishTime { get; set; }
         public int TimeForQuestionInSecounds { get; set; }
+        public int QuestionAmount { get; set; }
         public State QuizState { get; set; }
         public PickQuestionType QuizPickQuestionType { get; set; }
 
-        public QuizSessionAggregate(Guid quizId, Guid sessionOwnerId, DateTime startTime, int timeForQuestionInSecounds, PickQuestionType quizPickQuestionType)
+        public QuizSessionAggregate(Guid quizId, Guid sessionOwnerId, DateTime startTime, int timeForQuestionInSecounds, int questionAmount, PickQuestionType quizPickQuestionType)
         {
             QuizId = quizId;
             SessionOwnerId = sessionOwnerId;
             StartTime = startTime;
             TimeForQuestionInSecounds = timeForQuestionInSecounds;
+            QuestionAmount = questionAmount;
             QuizPickQuestionType = quizPickQuestionType;
 
             QuizState = State.Ready;
@@ -47,6 +50,13 @@ namespace Domain.Quiz.QuizSession
         {
             this.QuizState = State.Started;
             ActualStartTime = DateTime.Now;
+
+            AddDomainEvent(new QuizSessionStartedDomainEvent
+            {
+                QuizSessionId = this.Id,
+                TimeForSingleQuestion = this.TimeForQuestionInSecounds,
+                QuestionAmount = this.QuestionAmount,
+            });
         }
 
         public void Finish()

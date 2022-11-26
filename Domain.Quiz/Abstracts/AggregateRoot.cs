@@ -8,10 +8,12 @@ namespace Domain.Quiz.Abstracts
 {
     public abstract class AggregateRoot : Entity
     {
-        private readonly List<DomainEvent> _domainEvents = new List<DomainEvent>();
+        private List<DomainEvent> _domainEvents = new List<DomainEvent>();
 
         public void AddDomainEvent(DomainEvent domainEvent)
         {
+            if(_domainEvents == null)
+                _domainEvents = new List<DomainEvent>();
             _domainEvents.Add(domainEvent);
         }
 

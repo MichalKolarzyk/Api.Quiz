@@ -2,13 +2,16 @@ using Api.Quiz;
 using Api.Quiz.Middelwares;
 using Api.Quiz.Services;
 using Application.Quiz;
+using Application.Quiz.QuizSession.ExtenrnalEvents;
 using BaseImplementationLib;
 using BaseImplementationLib.RabbitMq;
 using Domain.Quiz;
 using FluentValidation;
 using Infrastructure.Quiz;
 using Infrastructure.Quiz.Databases;
+using Infrastructure.Quiz.Hubs;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 
 var settings = new ApiQuizSettings();
 
@@ -31,13 +34,23 @@ builder.Services.AddScoped<ExceptionMiddleware>();
 
 builder.Services.ReqisterMessageQueue(settings);
 builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange"});
-builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "Queue" });
+builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "AppEventListener" });
+
+builder.Services.AddScoped<ISessionComunicator, ServiceSessionHubInternal>();
+builder.Services.AddSignalR();
+
+builder.Services.AddExternalEvents();
 
 
 var app = builder.Build();
-
 app.UseMq();
-
+app.UseCors(builder =>
+{
+    builder.WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .WithMethods("GET", "POST")
+    .AllowCredentials();
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -50,7 +63,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ServiceSessionHub>(typeof(ServiceSessionHub).Name);
 
 app.UseMiddleware<ExceptionMiddleware>();
+
 
 app.Run();

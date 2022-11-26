@@ -1,7 +1,9 @@
 ﻿using Application.Quiz.Authentications;
 using Application.Quiz.Database;
+using Application.Quiz.ExtenrnalEvents;
 using Infrastructure.Quiz.Authentications;
 using Infrastructure.Quiz.Databases;
+using Infrastructure.Quiz.ExternalEvents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
@@ -45,6 +47,11 @@ namespace Infrastructure.Quiz
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.Key)),
                 };
             });
+        }
+
+        public static void AddExternalEvents(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddScoped<ISessionStartedExternalEvent, SessionStartedExternalEvent>();
         }
     }
 }

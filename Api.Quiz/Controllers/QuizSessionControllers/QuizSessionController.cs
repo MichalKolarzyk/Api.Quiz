@@ -37,6 +37,7 @@ namespace Api.Quiz.Controllers.QuizSessionControllers
                 SessionOwnerId = sessionOwner.Id,
                 StartTime = createQuizSessionDto.StartTime,
                 TimeForQuestionInSecounds = createQuizSessionDto.TimeForQuestionInSecounds,
+                QuestionAmount = createQuizSessionDto.QuestionAmount,
             };
             await _mediator.Send(createQuizSessionCommand);
 

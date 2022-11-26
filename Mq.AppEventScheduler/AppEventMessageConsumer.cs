@@ -38,12 +38,4 @@ namespace Mq.AppEventScheduler
             _scheduler.ScheduleJob(job, trigger);
         }
     }
-
-    public class AppEventMessage
-    {
-        public DateTime Start { get; set; }
-        public int EventsAmount { get; set; } = 1;
-        public int RepeatAfterSecounts { get; set; }
-        public string Payload { get; set; } = string.Empty;
-    }
 }

@@ -14,6 +14,7 @@ namespace Application.Quiz.QuizSession
         public Guid SessionOwnerId { get; set; }
         public DateTime StartTime { get; set; }
         public int TimeForQuestionInSecounds { get; set; }
+        public int QuestionAmount { get; set; }
         public QuizSessionAggregate.PickQuestionType QuizPickQuestionType { get; set; }
     }
 }
