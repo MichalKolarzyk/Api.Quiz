@@ -11,13 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Quiz", "Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Quiz", "Infrastructure.Quiz\Infrastructure.Quiz.csproj", "{64671A96-F32F-4C30-80D8-2017240C0663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mq.AppEventScheduler", "Mq.AppEventScheduler\Mq.AppEventScheduler.csproj", "{531217E2-3F15-41C8-913F-E14BEE552F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mq.AppEventScheduler", "Mq.AppEventScheduler\Mq.AppEventScheduler.csproj", "{531217E2-3F15-41C8-913F-E14BEE552F45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseImplementationLib", "BaseImplementationLib\BaseImplementationLib.csproj", "{8DDA7A4C-35BA-4A1C-B00E-1CEA8392465E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseImplementationLib", "BaseImplementationLib\BaseImplementationLib.csproj", "{8DDA7A4C-35BA-4A1C-B00E-1CEA8392465E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QuizGateway", "QuizGateway", "{C365FAF3-C41F-4BD0-896D-83AF8B2579E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppEventScheduler", "AppEventScheduler", "{A2D8C5CE-0692-49E1-8FC4-69A6BBC6DD0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Quiz", "Test.Quiz\Test.Quiz.csproj", "{392240F5-59C5-4AA5-833B-2B871940EEFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{8DDA7A4C-35BA-4A1C-B00E-1CEA8392465E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DDA7A4C-35BA-4A1C-B00E-1CEA8392465E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DDA7A4C-35BA-4A1C-B00E-1CEA8392465E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392240F5-59C5-4AA5-833B-2B871940EEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392240F5-59C5-4AA5-833B-2B871940EEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392240F5-59C5-4AA5-833B-2B871940EEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392240F5-59C5-4AA5-833B-2B871940EEFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{571FAD34-CD1E-4936-831D-D4C1EC98AC22} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
 		{64671A96-F32F-4C30-80D8-2017240C0663} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
 		{531217E2-3F15-41C8-913F-E14BEE552F45} = {A2D8C5CE-0692-49E1-8FC4-69A6BBC6DD0E}
+		{392240F5-59C5-4AA5-833B-2B871940EEFF} = {C365FAF3-C41F-4BD0-896D-83AF8B2579E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A94BEE7-0D56-4DFA-892A-199F1AD7C267}
