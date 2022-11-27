@@ -9,6 +9,6 @@ namespace Mq.AppEventScheduler
 {
     public class Settings : IMqSettings
     {
-        public string MqHostName { get; } = "localhost";
+        public string MqHostName { get; } = Environment.GetEnvironmentVariable("RABBITMQ_HOST_NAME") ?? "localhost";
     }
 }
