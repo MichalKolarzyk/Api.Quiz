@@ -1,4 +1,5 @@
 ﻿using Domain.Quiz.QuizSession;
+using Domain.Quiz.Quizzes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,13 @@ namespace Test.Quiz.QuizSessions
     {
         private QuizSessionAggregate? _quizSession;
 
-        [Given("The session is created")]
+        [Given]
         public void TheSessionIsCreated()
         {
-            _quizSession = new QuizSessionAggregate(Guid.NewGuid(),
+            var quiz = new QuizAggregate(Guid.NewGuid(), Guid.NewGuid());
+            quiz.QuestionIds.Add(Guid.NewGuid());
+
+            _quizSession = new QuizSessionAggregate(quiz,
                 Guid.NewGuid(),
                 DateTime.Now,
                 30,
@@ -23,7 +27,7 @@ namespace Test.Quiz.QuizSessions
                 QuizSessionAggregate.PickQuestionType.OneByOne);
         }
 
-        [Then("The session state should be Ready")]
+        [Then]
         public void TheSessionStateShouldBeReady()
         {
             _quizSession?.QuizState.Should().Be(QuizSessionAggregate.State.Ready);

@@ -1,5 +1,6 @@
 ﻿using Domain.Quiz.Abstracts;
 using Domain.Quiz.QuizSession.DomainEvents;
+using Domain.Quiz.Quizzes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +17,28 @@ namespace Domain.Quiz.QuizSession
         public DateTime ActualStartTime { get; set; }
         public DateTime FinishTime { get; set; }
         public int TimeForQuestionInSecounds { get; set; }
-        public int QuestionAmount { get; set; }
+        public int TimeBetweenQuestions { get; set; }
+        public int QuestionsAmount { get; set; }
         public State QuizState { get; set; }
         public PickQuestionType QuizPickQuestionType { get; set; }
         public List<QuizSessionQuesion> QuizSessionQuesions { get; set; }
 
-        public QuizSessionAggregate(Guid quizId, Guid sessionOwnerId, DateTime startTime, int timeForQuestionInSecounds, int questionAmount, PickQuestionType quizPickQuestionType)
+        public QuizSessionAggregate(QuizAggregate quizAggregate, Guid sessionOwnerId, DateTime startTime, int timeForQuestionInSecounds, int questionsAmount, PickQuestionType quizPickQuestionType)
         {
-            QuizId = quizId;
+            QuizId = quizAggregate.Id;
             SessionOwnerId = sessionOwnerId;
             StartTime = startTime;
             TimeForQuestionInSecounds = timeForQuestionInSecounds;
-            QuestionAmount = questionAmount;
+            QuestionsAmount = questionsAmount;
             QuizPickQuestionType = quizPickQuestionType;
 
             QuizSessionQuesions = new List<QuizSessionQuesion>();
             QuizState = State.Ready;
+
+            foreach(var questionId in quizAggregate.QuestionIds)
+            {
+                QuizSessionQuesions.Add(new QuizSessionQuesion(questionId));
+            }
         }
 
 
@@ -57,40 +64,34 @@ namespace Domain.Quiz.QuizSession
             {
                 QuizSessionId = this.Id,
                 TimeForSingleQuestion = this.TimeForQuestionInSecounds,
-                QuestionAmount = this.QuestionAmount,
+                QuestionAmount = this.QuestionsAmount,
             });
         }
 
-        public void AddQuizSessionQuestion(Guid questionId, int timeForQuestionInSeconds)
+        public void StartNextQuestion()
         {
-            this.QuizSessionQuesions.Add(new QuizSessionQuesion(questionId));
-        }
-
-        public void StartSessionQuestion(Guid sessionQuestionId)
-        {
-            var sessionQuestion = this.QuizSessionQuesions.FirstOrDefault(q => q.Id == sessionQuestionId);
+            var sessionQuestion = this.QuizSessionQuesions.FirstOrDefault(q => q.State == QuizSessionQuesion.QuizSessionQuesionState.Created);
             
             if (sessionQuestion == null)
-                throw new Exception("There is no sesion question with this id");
+                throw new Exception("There is no next session question");
 
             sessionQuestion.State = QuizSessionQuesion.QuizSessionQuesionState.Started;
         }
 
-        public void FinishSessionQuestion(Guid sessionQuestionId)
+        public void FinishCurrentQuestion()
         {
-            var sessionQuestion = this.QuizSessionQuesions.FirstOrDefault(q => q.Id == sessionQuestionId);
+            var sessionQuestion = this.QuizSessionQuesions.FirstOrDefault(q => q.State == QuizSessionQuesion.QuizSessionQuesionState.Started);
 
             if (sessionQuestion == null)
                 throw new Exception("There is no sesion question with this id");
 
             sessionQuestion.State = QuizSessionQuesion.QuizSessionQuesionState.Finished;
 
-            if(this.QuizSessionQuesions.Count == this.QuestionAmount && this.QuizSessionQuesions.All(q => q.State == QuizSessionQuesion.QuizSessionQuesionState.Finished))
+            if(this.QuizSessionQuesions.Count == this.QuestionsAmount && this.QuizSessionQuesions.All(q => q.State == QuizSessionQuesion.QuizSessionQuesionState.Finished))
             {
                 this.QuizState = State.Finished;
                 FinishTime = DateTime.Now;
             }
-
         }
 
         public void AnswerTheQuestion(Guid userProfileId, Guid questionId, string answer)

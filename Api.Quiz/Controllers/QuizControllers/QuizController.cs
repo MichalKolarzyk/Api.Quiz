@@ -3,10 +3,12 @@ using Domain.Quiz.Exceptions;
 using Domain.Quiz.Quizzes;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Quiz.Controllers.QuizControllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class QuizController : ControllerBase

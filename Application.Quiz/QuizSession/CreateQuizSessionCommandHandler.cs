@@ -1,6 +1,7 @@
 ﻿using Application.Quiz.Database;
 using Application.Quiz.QuizSession.ExtenrnalEvents;
 using Domain.Quiz.QuizSession;
+using Domain.Quiz.Quizzes;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,21 @@ namespace Application.Quiz.QuizSession
     public class CreateQuizSessionCommandHandler : IRequestHandler<CreateQuizSessionCommand>
     {
         private readonly IRepository<QuizSessionAggregate> _quizSessionRepository;
+        private readonly IRepository<QuizAggregate> _quizRepository;
         private readonly ISessionComunicator _sessionComunicator;
 
-        public CreateQuizSessionCommandHandler(IRepository<QuizSessionAggregate> quizSessionRepository, ISessionComunicator sessionComunicator)
+        public CreateQuizSessionCommandHandler(IRepository<QuizSessionAggregate> quizSessionRepository, ISessionComunicator sessionComunicator, IRepository<QuizAggregate> quizRepository)
         {
             _quizSessionRepository = quizSessionRepository;
             _sessionComunicator = sessionComunicator;
+            _quizRepository = quizRepository;
         }
 
         public async Task<Unit> Handle(CreateQuizSessionCommand request, CancellationToken cancellationToken)
         {
+            var quiz = await _quizRepository.GetAsync(q => q.Id == request.QuizId);
             var quizSession = new QuizSessionAggregate(
-                request.QuizId, 
+                quiz, 
                 request.SessionOwnerId, 
                 request.StartTime, 
                 request.TimeForQuestionInSecounds, 

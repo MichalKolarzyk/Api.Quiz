@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="QuizSessions\StartQuizSession - Copy.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
     <PackageReference Include="SpecFlow.xUnit" Version="3.9.40" />
@@ -17,6 +21,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application.Quiz\Application.Quiz.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QuizSessions\FinishQuizSessionQuestion.feature.cs">
+      <DependentUpon>FinishQuizSessionQuestion.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="QuizSessions\FinishQuizSessionQuestion.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

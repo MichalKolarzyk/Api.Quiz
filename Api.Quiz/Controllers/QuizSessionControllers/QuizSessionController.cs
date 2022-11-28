@@ -3,10 +3,12 @@ using Application.Quiz.Database;
 using Application.Quiz.QuizSession;
 using Domain.Quiz.UserProfile;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Quiz.Controllers.QuizSessionControllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class QuizSessionController : ControllerBase

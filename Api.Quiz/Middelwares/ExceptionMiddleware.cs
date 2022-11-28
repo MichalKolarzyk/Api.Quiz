@@ -32,7 +32,7 @@ namespace Api.Quiz.Middelwares
                     Errors = new Dictionary<string, string>
                     {
                         {"Message", exception.Message },
-                        {"StackTrace", exception.StackTrace},
+                        {"StackTrace", exception.StackTrace ?? ""},
                     }
                 });
             }

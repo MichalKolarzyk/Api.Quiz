@@ -1,9 +1,11 @@
 ﻿using Application.Quiz.Questions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Quiz.Controllers.QuestionControllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class QuestionController : ControllerBase
@@ -40,7 +42,6 @@ namespace Api.Quiz.Controllers.QuestionControllers
                 CorrectAnswerIndex = createQuestion.CorrectAnswerIndex,
                 Description = createQuestion.Description,
             });
-
             return Ok();
         }
     }
