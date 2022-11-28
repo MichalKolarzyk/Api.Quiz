@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Test.Quiz": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
