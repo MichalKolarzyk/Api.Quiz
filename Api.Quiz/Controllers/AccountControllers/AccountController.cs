@@ -28,7 +28,7 @@ namespace Api.Quiz.Controllers.AccountControllers
         {
             var result = _registerUserCommandValidator.Validate(registerAccountCommand);
             if (!result.IsValid)
-                throw new DomainValidationException(result);
+                throw new ValidationDomainException(result);
 
             await _mediator.Send(registerAccountCommand);
 
@@ -40,7 +40,7 @@ namespace Api.Quiz.Controllers.AccountControllers
         {
             var result = _loginToAccountCommandValidator.Validate(loginUserCommand);
             if (!result.IsValid)
-                throw new DomainValidationException(result);
+                throw new ValidationDomainException(result);
 
             var loginResult = await _mediator.Send(loginUserCommand);
 

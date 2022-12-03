@@ -28,7 +28,7 @@ namespace Api.Quiz.Controllers.QuizControllers
             var result = _createQuizCommandValidator.Validate(createQuizCommand);
 
             if (!result.IsValid)
-                throw new DomainValidationException(result);
+                throw new ValidationDomainException(result);
 
             var createdQuiz = await _mediator.Send(createQuizCommand);
             return Ok(createdQuiz.Id);

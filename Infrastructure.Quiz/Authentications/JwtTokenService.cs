@@ -25,7 +25,7 @@ namespace Infrastructure.Quiz.Authentications
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.Key));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddSeconds(_authenticationSettings.ExpireTimeInSeconds);
+            var expires = data.Expires;
 
             var token = new JwtSecurityToken(claims: claims, expires: expires, signingCredentials: cred);
             var tokenHandler = new JwtSecurityTokenHandler();

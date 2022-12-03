@@ -1,4 +1,5 @@
-﻿using BaseImplementationLib.RabbitMq;
+﻿using Application.Quiz.Authentications;
+using BaseImplementationLib.RabbitMq;
 using Infrastructure.Quiz.Authentications;
 using Infrastructure.Quiz.Databases;
 

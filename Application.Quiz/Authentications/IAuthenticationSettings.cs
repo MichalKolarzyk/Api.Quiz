@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Quiz.Authentications
+namespace Application.Quiz.Authentications
 {
     public interface IAuthenticationSettings
     {

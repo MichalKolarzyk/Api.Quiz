@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Application.Quiz.GeneralExceptions
 {
-    public class DomainValidationExceptionHandler : IRequestHandler<DomainValidationException, ErrorMessage>
+    public class DomainValidationExceptionHandler : IRequestHandler<ValidationDomainException, ErrorMessage>
     {
-        public async Task<ErrorMessage> Handle(DomainValidationException request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> Handle(ValidationDomainException request, CancellationToken cancellationToken)
         {
             return await Task.Run(() => new ErrorMessage
             {

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Quiz.Exceptions
 {
-    public class DomainValidationException : DomainException
+    public class ValidationDomainException : DomainException
     {
         public ValidationResult ValidationResult { get; set; }
 
-        public DomainValidationException(ValidationResult validationResult)
+        public ValidationDomainException(ValidationResult validationResult)
         {
             ValidationResult = validationResult;
         }
