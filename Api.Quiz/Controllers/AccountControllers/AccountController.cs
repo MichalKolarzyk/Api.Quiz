@@ -12,11 +12,15 @@ namespace Api.Quiz.Controllers.AccountControllers
     {
         private readonly IMediator _mediator;
         private readonly IValidator<RegisterAccountCommand> _registerUserCommandValidator;
+        private readonly IValidator<LoginToAccountCommand> _loginToAccountCommandValidator;
 
-        public AccountController(IMediator mediator, IValidator<RegisterAccountCommand> registerUserCommandValidator)
+        public AccountController(IMediator mediator, 
+            IValidator<RegisterAccountCommand> registerUserCommandValidator, 
+            IValidator<LoginToAccountCommand> loginToAccountCommandValidator)
         {
             _mediator = mediator;
             _registerUserCommandValidator = registerUserCommandValidator;
+            _loginToAccountCommandValidator = loginToAccountCommandValidator;
         }
 
         [HttpPost("register")]
@@ -34,6 +38,10 @@ namespace Api.Quiz.Controllers.AccountControllers
         [HttpPost("login")]
         public async Task<ActionResult<LoginToAccountResponse>> Login([FromBody] LoginToAccountCommand loginUserCommand)
         {
+            var result = _loginToAccountCommandValidator.Validate(loginUserCommand);
+            if (!result.IsValid)
+                throw new DomainValidationException(result);
+
             var loginResult = await _mediator.Send(loginUserCommand);
 
             return Ok(loginResult);

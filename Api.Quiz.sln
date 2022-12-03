@@ -19,7 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QuizGateway", "QuizGateway"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppEventScheduler", "AppEventScheduler", "{A2D8C5CE-0692-49E1-8FC4-69A6BBC6DD0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Quiz", "Test.Quiz\Test.Quiz.csproj", "{392240F5-59C5-4AA5-833B-2B871940EEFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Quiz", "Test.Quiz\Test.Quiz.csproj", "{392240F5-59C5-4AA5-833B-2B871940EEFF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2853C67F-F5BF-4118-BA53-2C313B219787}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

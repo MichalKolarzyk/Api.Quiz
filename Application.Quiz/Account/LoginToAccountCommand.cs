@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,14 @@ namespace Application.Quiz.Account
         public string Login { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
+    }
+
+    public class LoginToAccountCommandValidator : AbstractValidator<LoginToAccountCommand>
+    {
+        public LoginToAccountCommandValidator()
+        {
+            RuleFor(r => r.Login).NotEmpty();
+            RuleFor(r => r.Password).NotEmpty();
+        }
     }
 }

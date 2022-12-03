@@ -44,5 +44,11 @@ namespace Api.Quiz.Controllers.QuestionControllers
             });
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<GetQuestionResponse> Get([FromQuery] GetQuestionCommand getQuestionCommand)
+        {
+            return await _mediator.Send(getQuestionCommand);
+        }
     }
 }
