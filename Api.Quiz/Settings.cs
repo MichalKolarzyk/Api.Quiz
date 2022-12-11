@@ -5,7 +5,7 @@ using Infrastructure.Quiz.Databases;
 
 namespace Api.Quiz
 {
-    public class ApiQuizSettings : IMongoRepositorySettings, IAuthenticationSettings, IMqSettings
+    internal class Settings : IMongoRepositorySettings, IAuthenticationSettings, IMqSettings
     {
         public string MongoConnectionString { get; } = Environment.GetEnvironmentVariable("QUIZAPI_MONGODB_CONNECTIONSTRING") ?? "mongodb://localhost:27017";
 

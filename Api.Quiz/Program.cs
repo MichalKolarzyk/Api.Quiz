@@ -13,7 +13,7 @@ using Infrastructure.Quiz.Hubs;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 
-var settings = new ApiQuizSettings();
+var settings = new Settings();
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -33,6 +33,7 @@ builder.Services.AddScoped<HttpContextService>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
 builder.Services.ReqisterMessageQueue(settings);
+builder.Services.RegisterMqQueue(new MqQueue { Name = "AppEventListener" });
 builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange"});
 builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "AppEventListener" });
 

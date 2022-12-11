@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mq.AppEventScheduler
 {
-    public class Settings : IMqSettings
+    internal class Settings : IMqSettings
     {
         public string MqHostName { get; } = Environment.GetEnvironmentVariable("RABBITMQ_HOST_NAME") ?? "localhost";
     }
