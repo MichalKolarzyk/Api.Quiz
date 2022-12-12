@@ -27,6 +27,7 @@ services:
   environment:
    - RABBITMQ_HOST_NAME=rabbitmq
    - QUIZAPI_MONGODB_CONNECTIONSTRING=mongodb://root:root@mongodb:27017
+   - ASPNETCORE_ENVIRONMENT=Development
   ports:
    - 5001:443
    - 5000:80
