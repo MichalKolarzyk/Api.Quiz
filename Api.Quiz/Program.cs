@@ -34,7 +34,7 @@ builder.Services.AddScoped<ExceptionMiddleware>();
 
 builder.Services.ReqisterMessageQueue(settings);
 builder.Services.RegisterMqQueue(new MqQueue { Name = "AppEventListener" });
-builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange"});
+builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange" });
 builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "AppEventListener" });
 
 builder.Services.AddScoped<ISessionComunicator, ServiceSessionHubInternal>();
