@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Test.Quiz.QuizSessions
+namespace Test.Quiz.Features.QuizSessionsFeatures
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace Test.Quiz.QuizSessions
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class CreateQuizSessionFeature : object, Xunit.IClassFixture<CreateQuizSessionFeature.FixtureData>, System.IDisposable
+    public partial class FinishQuizSessionQuestionFeature : object, Xunit.IClassFixture<FinishQuizSessionQuestionFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace Test.Quiz.QuizSessions
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "CreateQuizSession.feature"
+#line 1 "FinishQuizSessionQuestion.feature"
 #line hidden
         
-        public CreateQuizSessionFeature(CreateQuizSessionFeature.FixtureData fixtureData, Test_Quiz_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FinishQuizSessionQuestionFeature(FinishQuizSessionQuestionFeature.FixtureData fixtureData, Test_Quiz_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace Test.Quiz.QuizSessions
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "QuizSessions", "CreateQuizSession", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/QuizSessionsFeatures", "FinishQuizSessionQuestion", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,15 +80,17 @@ namespace Test.Quiz.QuizSessions
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Create quiz session")]
-        [Xunit.TraitAttribute("FeatureTitle", "CreateQuizSession")]
-        [Xunit.TraitAttribute("Description", "Create quiz session")]
-        public virtual void CreateQuizSession()
+        [Xunit.SkippableFactAttribute(DisplayName="Finish last session question")]
+        [Xunit.TraitAttribute("FeatureTitle", "FinishQuizSessionQuestion")]
+        [Xunit.TraitAttribute("Description", "Finish last session question")]
+        [Xunit.TraitAttribute("Category", "QuizSessionAggregates")]
+        public virtual void FinishLastSessionQuestion()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "QuizSessionAggregates"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create quiz session", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 3
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Finish last session question", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -108,11 +110,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
- testRunner.Given("The session is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 5
- testRunner.Then("The session state should be Ready", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("The session is created with 1 questions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 6
+ testRunner.When("Session is started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 7
+ testRunner.When("Next question is started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 8
+ testRunner.When("Current question is finished", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+ testRunner.Then("The quiz session should have Finished State", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -125,12 +136,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                CreateQuizSessionFeature.FeatureSetup();
+                FinishQuizSessionQuestionFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                CreateQuizSessionFeature.FeatureTearDown();
+                FinishQuizSessionQuestionFeature.FeatureTearDown();
             }
         }
     }
