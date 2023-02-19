@@ -1,7 +1,7 @@
 ﻿using Domain.Quiz.QuizSession;
 using Domain.Quiz.Quizzes;
 
-namespace Test.Quiz.StepDefinitions.QuizSessionAggregates
+namespace Test.Quiz.StepDefinitions
 {
     [Binding, Scope(Tag = "QuizSessionAggregates")]
     public class QuizSessionAggregateSteps
@@ -25,7 +25,7 @@ namespace Test.Quiz.StepDefinitions.QuizSessionAggregates
                 DateTime.Now,
                 30,
                 10,
-                QuizSessionAggregate.PickQuestionType.OneByOne);
+                QuizSessionAggregate.PickQuestionType.InOrder);
 
             _scenarioContext.Set(quizSession);
         }
@@ -41,7 +41,7 @@ namespace Test.Quiz.StepDefinitions.QuizSessionAggregates
                 startDate,
                 timeForEachQuestion,
                 questionAmount,
-                QuizSessionAggregate.PickQuestionType.OneByOne);
+                QuizSessionAggregate.PickQuestionType.InOrder);
 
             _scenarioContext.Set(quizSession);
         }

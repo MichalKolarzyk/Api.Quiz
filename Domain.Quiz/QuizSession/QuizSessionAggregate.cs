@@ -44,7 +44,7 @@ namespace Domain.Quiz.QuizSession
 
         public enum PickQuestionType
         {
-            OneByOne,
+            InOrder,
             Random,
         }
 

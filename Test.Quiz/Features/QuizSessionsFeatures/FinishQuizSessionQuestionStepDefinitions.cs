@@ -31,7 +31,7 @@ namespace Test.Quiz.Features.QuizSessionsFeatures
                 DateTime.Now,
                 30,
                 number,
-                QuizSessionAggregate.PickQuestionType.OneByOne);
+                QuizSessionAggregate.PickQuestionType.InOrder);
 
             _scenarioContext.Set(quizSession);
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Quiz.StepDefinitions.QuizAggregates
+namespace Test.Quiz.StepDefinitions
 {
     [Binding, Scope(Tag = "QuizAggregatesSteps")]
     public class QuizAggregatesSteps
