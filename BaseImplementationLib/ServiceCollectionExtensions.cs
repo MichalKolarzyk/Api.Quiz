@@ -13,12 +13,12 @@ namespace BaseImplementationLib
     {
         public static void ReqisterMessageQueue(this IServiceCollection services, IMqSettings mqSettings)
         {
-            var factory = new ConnectionFactory() { HostName = mqSettings.MqHostName };
-            var connection = factory.CreateConnection();
-            var channel = connection.CreateModel();
-            services.AddSingleton<IMqSettings>(mqSettings);
-            services.AddSingleton(channel);
-            services.AddSingleton(typeof(ProducerBase<>));
+            //var factory = new ConnectionFactory() { HostName = mqSettings.MqHostName };
+            //var connection = factory.CreateConnection();
+            //var channel = connection.CreateModel();
+            //services.AddSingleton<IMqSettings>(mqSettings);
+            //services.AddSingleton(channel);
+            //services.AddSingleton(typeof(ProducerBase<>));
         }
 
         public static void RegisterMqConsumer<TConsumer>(this IServiceCollection services)

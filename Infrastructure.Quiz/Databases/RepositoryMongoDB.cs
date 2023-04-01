@@ -41,9 +41,14 @@ namespace Infrastructure.Quiz.Databases
             return await _mongoCollection.Find<T>(expression).FirstOrDefaultAsync();
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> expression)
+        public Task<List<T>> GetListAsync(Expression<Func<T, bool>> expression, int take = 10, int skip = 0)
         {
-            return _mongoCollection.Find<T>(expression).ToEnumerable();
+            return _mongoCollection.Find<T>(expression).Limit(take).Skip(skip).ToListAsync();
+        }
+
+        public async Task<long> GetCount(Expression<Func<T, bool>> expression)
+        {
+            return await _mongoCollection.Find<T>(expression).CountDocumentsAsync();
         }
     }
 }

@@ -14,16 +14,16 @@ namespace Application.Quiz.QuizSession.DomainEventHandlers
 {
     public class QuizSessionStartedDomainEventHandler : INotificationHandler<QuizSessionStartedDomainEvent>
     {
-        private readonly ISessionStartedExternalEvent _sessionStartedExternalEvent;
+        //private readonly ISessionStartedExternalEvent _sessionStartedExternalEvent;
 
-        public QuizSessionStartedDomainEventHandler(ISessionStartedExternalEvent sessionStartedExternalEvent)
+        public QuizSessionStartedDomainEventHandler()
         {
-            _sessionStartedExternalEvent = sessionStartedExternalEvent;
+            //_sessionStartedExternalEvent = sessionStartedExternalEvent;
         }
 
         public Task Handle(QuizSessionStartedDomainEvent notification, CancellationToken cancellationToken)
         {
-            _sessionStartedExternalEvent.Publish(notification);
+            //_sessionStartedExternalEvent.Publish(notification);
             return Task.CompletedTask;
         }
     }

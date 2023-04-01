@@ -20,7 +20,7 @@ namespace Application.Quiz.Quizzes
 
         public async Task<GetQuizesResponse> Handle(GetQuizesCommand request, CancellationToken cancellationToken)
         {
-            var quizes = _repository.Get(q => q.WorkspaceId == request.WorkspaceId).ToList();
+            var quizes = await _repository.GetListAsync(q => q.WorkspaceId == request.WorkspaceId);
 
             return new GetQuizesResponse
             {

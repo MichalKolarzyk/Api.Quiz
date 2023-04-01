@@ -11,10 +11,18 @@ namespace Application.Quiz.Questions
     public class UpdateQuestionCommand : IRequest
     {
         public Guid Id { get; set; }
-        public Guid WorkspaceId { get; set; }
-        public string Description { get; set; } = string.Empty;
+
+        public string Question { get; set; } = string.Empty;
+
         public List<string> Answers { get; set; } = new();
+
         public int CorrectAnswerIndex { get; set; }
+
+        public bool IsPrivate { get; set; } = false;
+
+        public string Category { get; set; } = string.Empty;
+
+        public string DefaultLanugage { get; set; } = string.Empty;
     }
 
     public class UpdateQuestionCommandValidator : AbstractValidator<UpdateQuestionCommand>

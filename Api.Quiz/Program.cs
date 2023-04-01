@@ -32,15 +32,15 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<HttpContextService>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
-builder.Services.ReqisterMessageQueue(settings);
-builder.Services.RegisterMqQueue(new MqQueue { Name = "AppEventListener" });
-builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange" });
-builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "AppEventListener" });
+//builder.Services.ReqisterMessageQueue(settings);
+//builder.Services.RegisterMqQueue(new MqQueue { Name = "AppEventListener" });
+//builder.Services.RegisterMqExchange(new MqExchange { Name = "StartQuizExchange" });
+//builder.Services.RegisterMqQueueBinding(new MqQueueBind { ExchangeName = "StartQuizExchange", QueueName = "AppEventListener" });
 
-builder.Services.AddScoped<ISessionComunicator, ServiceSessionHubInternal>();
-builder.Services.AddSignalR();
+//builder.Services.AddScoped<ISessionComunicator, ServiceSessionHubInternal>();
+//builder.Services.AddSignalR();
 
-builder.Services.AddExternalEvents();
+//builder.Services.AddExternalEvents();
 
 
 var app = builder.Build();
@@ -64,7 +64,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapHub<ServiceSessionHub>(typeof(ServiceSessionHub).Name);
+//app.MapHub<ServiceSessionHub>(typeof(ServiceSessionHub).Name);
 
 app.UseMiddleware<ExceptionMiddleware>();
 

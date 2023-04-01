@@ -21,8 +21,8 @@ namespace Application.Quiz.Account
 
         public async Task<Unit> Handle(RegisterAccountCommand request, CancellationToken cancellationToken)
         {
-            bool userAlreadyExists = _repository.Get(a => a.Login == request.Login).Any();
-            if (userAlreadyExists)
+            var userWithTheSameLogin = await _repository.GetAsync(a => a.Login == request.Login);
+            if (userWithTheSameLogin != null)
                 throw new UnprocessableEntityDomainException("Login is already taken.", nameof(request.Login));
 
             var newUser = new AccountAggregate(request.Login, request.Password);

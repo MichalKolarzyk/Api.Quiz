@@ -15,12 +15,12 @@ namespace Application.Quiz.QuizSession
     {
         private readonly IRepository<QuizSessionAggregate> _quizSessionRepository;
         private readonly IRepository<QuizAggregate> _quizRepository;
-        private readonly ISessionComunicator _sessionComunicator;
+        //private readonly ISessionComunicator _sessionComunicator;
 
-        public CreateQuizSessionCommandHandler(IRepository<QuizSessionAggregate> quizSessionRepository, ISessionComunicator sessionComunicator, IRepository<QuizAggregate> quizRepository)
+        public CreateQuizSessionCommandHandler(IRepository<QuizSessionAggregate> quizSessionRepository, IRepository<QuizAggregate> quizRepository)
         {
             _quizSessionRepository = quizSessionRepository;
-            _sessionComunicator = sessionComunicator;
+           // _sessionComunicator = sessionComunicator;
             _quizRepository = quizRepository;
         }
 
@@ -35,7 +35,7 @@ namespace Application.Quiz.QuizSession
                 request.QuestionAmount, 
                 request.QuizPickQuestionType);
 
-            await _sessionComunicator.SendMessageToAll($"quiz session created {quizSession.Id}");
+            //await _sessionComunicator.SendMessageToAll($"quiz session created {quizSession.Id}");
 
             await _quizSessionRepository.InsertAsync(quizSession);
             return Unit.Value;

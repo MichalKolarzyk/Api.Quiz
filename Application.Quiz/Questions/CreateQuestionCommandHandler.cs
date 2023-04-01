@@ -4,20 +4,23 @@ using MediatR;
 
 namespace Application.Quiz.Questions
 {
-    public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand>
+    public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, CreateQuestionResponse>
     {
-        private readonly IRepository<QuestionAggregate> _questionRepository;
+        private readonly IRepository<Question> _questionRepository;
 
-        public CreateQuestionCommandHandler(IRepository<QuestionAggregate> questionRepository)
+        public CreateQuestionCommandHandler(IRepository<Question> questionRepository)
         {
             _questionRepository = questionRepository;
         }
 
-        public async Task<Unit> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
+        public async Task<CreateQuestionResponse> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
         {
-            QuestionAggregate question = new QuestionAggregate(request.WorkspaceId, request.Description, request.Answers, request.CorrectAnswerIndex);
+            Question question = new Question(request.Question, request.Answers, request.CorrectAnswerIndex, request.IsPrivate, request.Category, request.DefaultLanugage);
             await _questionRepository.InsertAsync(question);
-            return Unit.Value;
+            return new CreateQuestionResponse
+            {
+                Id = question.Id,
+            };
         }
     }
 }
