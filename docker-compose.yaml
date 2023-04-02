@@ -1,25 +1,25 @@
 version: "3.9"
 
 services:
- rabbitmq:
-  image: rabbitmq:3-management-alpine
-  ports:
-   - 5672:5672
-   - 15672:15672
-  healthcheck:
-   test: rabbitmq-diagnostics -q ping
-   interval: 10s
-   timeout: 10s
-   retries: 5
+ #rabbitmq:
+ # image: rabbitmq:3-management-alpine
+ # ports:
+ #  - 5672:5672
+ #  - 15672:15672
+ # healthcheck:
+ #  test: rabbitmq-diagnostics -q ping
+ #  interval: 10s
+ #  timeout: 10s
+ #  retries: 5
 
- mq-app-event-scheduler:
-  build:
-   dockerfile: ./Mq.AppEventScheduler/Dockerfile
-  environment:
-   - RABBITMQ_HOST_NAME=rabbitmq
-  depends_on: 
-   rabbitmq:
-    condition: service_healthy
+ #mq-app-event-scheduler:
+ # build:
+ #  dockerfile: ./Mq.AppEventScheduler/Dockerfile
+ # environment:
+ #  - RABBITMQ_HOST_NAME=rabbitmq
+ # depends_on: 
+ #  rabbitmq:
+ #   condition: service_healthy
  
  api.quiz:
   build:
@@ -31,12 +31,14 @@ services:
   ports:
    - 5001:443
    - 5000:80
-  depends_on: 
-   rabbitmq:
-    condition: service_healthy
+  #depends_on: 
+  # rabbitmq:
+  #  condition: service_healthy
  
  mongodb:
   image: mongo
   environment:
    MONGO_INITDB_ROOT_USERNAME: root
    MONGO_INITDB_ROOT_PASSWORD: root
+  ports:
+   - 27017:10000

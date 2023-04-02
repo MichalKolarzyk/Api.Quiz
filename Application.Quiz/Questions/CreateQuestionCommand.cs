@@ -22,13 +22,4 @@ namespace Application.Quiz.Questions
 
         public string DefaultLanugage { get; set; } = string.Empty;
     }
-
-    public class AddQuestionCommandValidator : AbstractValidator<CreateQuestionCommand>
-    {
-        public AddQuestionCommandValidator()
-        {
-            RuleFor(x => x.CorrectAnswerIndex)
-                .LessThan(x => x.Answers.Count);
-        }
-    }
 }

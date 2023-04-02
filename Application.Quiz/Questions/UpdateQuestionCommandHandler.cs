@@ -16,11 +16,7 @@ namespace Application.Quiz.Questions
         public async Task<Unit> Handle(UpdateQuestionCommand request, CancellationToken cancellationToken)
         {
             Question question = await _questionRepository.GetAsync(q => q.Id == request.Id);
-            question.DefaultLanugage = request.DefaultLanugage;
-            question.Description = request.Question;
-            question.Answers= request.Answers;
-            question.CorrectAnswerIndex = request.CorrectAnswerIndex;
-            question.Category= request.Category;
+            question.UpdateQuestion(request.Question, request.Answers, request.CorrectAnswerIndex, request.IsPrivate, request.Category, request.DefaultLanugage);
             await _questionRepository.UpdateAsync(question);
             return Unit.Value;
         }

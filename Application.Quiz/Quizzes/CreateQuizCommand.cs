@@ -12,15 +12,4 @@ namespace Application.Quiz.Quizzes
 
         public Guid ThemeId { get; set; }
     }
-
-    public class CreateQuizCommandValidator : AbstractValidator<CreateQuizCommand>
-    {
-        public CreateQuizCommandValidator()
-        {
-            RuleFor(q => q.Name).NotEmpty();
-            RuleFor(q => q.Name).MinimumLength(10);
-            RuleFor(q => q.ThemeId).NotEmpty();
-            RuleFor(q => q.WorkspaceId).NotEmpty();
-        }
-    }
 }

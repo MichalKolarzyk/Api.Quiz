@@ -14,13 +14,4 @@ namespace Application.Quiz.Account
 
         public string Password { get; set; } = string.Empty;
     }
-
-    public class LoginToAccountCommandValidator : AbstractValidator<LoginToAccountCommand>
-    {
-        public LoginToAccountCommandValidator()
-        {
-            RuleFor(r => r.Login).NotEmpty();
-            RuleFor(r => r.Password).NotEmpty();
-        }
-    }
 }

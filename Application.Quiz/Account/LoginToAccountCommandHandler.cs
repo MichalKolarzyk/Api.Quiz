@@ -26,12 +26,14 @@ namespace Application.Quiz.Account
 
         public async Task<LoginToAccountResponse> Handle(LoginToAccountCommand request, CancellationToken cancellationToken)
         {
+            var result = new Result();
+
             var user = await _userRepository.GetAsync(u => u.Login == request.Login);
             if (user == null)
-                throw new NotFoundDomainException("Wrong user name or password.");
+                throw Result.DomainException(new Error("Wrong user name or password.", 404));
 
             if(user.HashPassword != request.Password)
-                throw new NotFoundDomainException("Wrong user name or password.");
+                throw Result.DomainException(new Error("Wrong user name or password.", 404));
 
             var expires = DateTime.Now.AddSeconds(_authenticationSettings.ExpireTimeInSeconds);
             var token = _authenticationTokenService.GenerateToken(new GenerateTokenData

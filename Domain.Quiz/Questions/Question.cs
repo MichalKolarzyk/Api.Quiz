@@ -1,9 +1,5 @@
 ﻿using Domain.Quiz.Abstracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Quiz.Exceptions;
 
 namespace Domain.Quiz.Questions
 {
@@ -23,6 +19,25 @@ namespace Domain.Quiz.Questions
 
         public Question(string description, List<string> answers, int correctAnswerIndex, bool isPrivate, string category, string defualtLanguage)
         {
+            UpdateQuestion(description, answers, correctAnswerIndex, isPrivate, category, defualtLanguage);
+        }
+
+        public void UpdateQuestion(string description, List<string> answers, int correctAnswerIndex, bool isPrivate, string category, string defualtLanguage)
+        {
+            var result = new Result();
+
+            if (string.IsNullOrEmpty(description))
+                result.AddError(new Error("You have to provide question", nameof(Description), 403));
+
+            if (answers.Count < 3)
+                result.AddError(new Error("You have to provide at least 3 answers", nameof(Answers), 403));
+
+            if (correctAnswerIndex < 1 || correctAnswerIndex > answers.Count)
+                result.AddError(new Error("Correct answer index is not set", nameof(CorrectAnswerIndex), 403));
+
+            if (result.HasErrors)
+                throw result.ToException();
+
             Description = description;
             Answers = answers;
             CorrectAnswerIndex = correctAnswerIndex;

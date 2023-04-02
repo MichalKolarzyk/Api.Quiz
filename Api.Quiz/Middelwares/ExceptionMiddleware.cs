@@ -1,5 +1,6 @@
 ﻿using Domain.Quiz.Abstracts;
 using MediatR;
+using System;
 
 namespace Api.Quiz.Middelwares
 {
@@ -19,21 +20,26 @@ namespace Api.Quiz.Middelwares
             }
             catch(DomainException domainException)
             {
-                var errorMessage = await _mediator.Send(domainException);
-                context.Response.StatusCode = errorMessage.StatusCode;
-                await context.Response.WriteAsJsonAsync(errorMessage);
+                context.Response.StatusCode = domainException.StatusCode;
+                await context.Response.WriteAsJsonAsync(new ErrorResponse
+                {
+                    StatusCode = domainException.StatusCode,
+                    Errors = domainException.Errors,
+                    StackTrace = domainException.StackTrace ?? "",
+                });
             }
             catch (Exception exception)
             {
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsJsonAsync(new ErrorMessage
+                await context.Response.WriteAsJsonAsync(new ErrorResponse
                 {
                     StatusCode = 500,
                     Errors = new Dictionary<string, string>
                     {
-                        {"Message", exception.Message },
-                        {"StackTrace", exception.StackTrace ?? ""},
-                    }
+                        {"", exception.Message },
+                    },
+                    StackTrace = exception.StackTrace ?? "",
+                    Message= exception.Message,
                 });
             }
         }
