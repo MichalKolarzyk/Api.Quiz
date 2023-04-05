@@ -1,4 +1,5 @@
 ﻿using Application.Quiz.Database;
+using Domain.Quiz.Accounts;
 using Domain.Quiz.Questions;
 using MediatR;
 using System;
@@ -13,10 +14,12 @@ namespace Application.Quiz.Questions
     public class FilterQuestionsCommandHandler : IRequestHandler<FilterQuestionsCommand, GetQuestionsResponse>
     {
         private readonly IRepository<Question> _questionRepository;
+        private readonly IRepository<Account> _accountRepository;
 
-        public FilterQuestionsCommandHandler(IRepository<Question> questionRepository)
+        public FilterQuestionsCommandHandler(IRepository<Question> questionRepository, IRepository<Account> accountRepository)
         {
             _questionRepository = questionRepository;
+            _accountRepository = accountRepository;
         }
 
         public async Task<GetQuestionsResponse> Handle(FilterQuestionsCommand request, CancellationToken cancellationToken)
@@ -25,6 +28,9 @@ namespace Application.Quiz.Questions
 
             var questions = await _questionRepository.GetListAsync(predicate, request.Take, request.Skip);
             var count = await _questionRepository.GetCount(predicate);
+
+            var authorsIds = questions.Select(q => q.AuthorId).Distinct().ToList();
+            var authors = await _accountRepository.GetListAsync(authorsIds);
 
             return new GetQuestionsResponse()
             {
@@ -37,6 +43,7 @@ namespace Application.Quiz.Questions
                     DefaultLanugage = q.DefaultLanugage,
                     IsPrivate = q.IsPrivate,
                     Id = q.Id,
+                    Author = authors.FirstOrDefault(a => a.Id == q.AuthorId)?.Login ?? "",
                 }).ToList(),
                 Count = count,
             };

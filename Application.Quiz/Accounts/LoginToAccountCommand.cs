@@ -6,14 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Account
+namespace Application.Quiz.Accounts
 {
-    public class RegisterAccountCommand : IRequest
+    public class LoginToAccountCommand : IRequest<LoginToAccountResponse>
     {
         public string Login { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
-
-        public string RepetePassword { get; set; } = string.Empty;
     }
 }

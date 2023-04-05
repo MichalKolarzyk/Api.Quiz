@@ -17,9 +17,12 @@ namespace Domain.Quiz.Questions
 
         public string DefaultLanugage { get; set; } = string.Empty;
 
-        public Question(string description, List<string> answers, int correctAnswerIndex, bool isPrivate, string category, string defualtLanguage)
+        public Guid AuthorId { get; set; }
+
+        public Question(string description, List<string> answers, int correctAnswerIndex, bool isPrivate, string category, string defualtLanguage, Guid authorId)
         {
             UpdateQuestion(description, answers, correctAnswerIndex, isPrivate, category, defualtLanguage);
+            AuthorId = authorId;
         }
 
         public void UpdateQuestion(string description, List<string> answers, int correctAnswerIndex, bool isPrivate, string category, string defualtLanguage)

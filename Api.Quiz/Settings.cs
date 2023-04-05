@@ -7,7 +7,7 @@ namespace Api.Quiz
 {
     internal class Settings : IMongoRepositorySettings, IAuthenticationSettings, IMqSettings
     {
-        public string MongoConnectionString { get; } = Environment.GetEnvironmentVariable("QUIZAPI_MONGODB_CONNECTIONSTRING") ?? "mongodb://localhost:27017";
+        public string MongoConnectionString { get; } = Environment.GetEnvironmentVariable("QUIZAPI_MONGODB_CONNECTIONSTRING") ?? "mongodb://localhost:27017/";
 
         public string MongoDatabase { get; } = Environment.GetEnvironmentVariable("QUIZAPI_MONGODB_DATABASE_NAME") ?? "QuizDatabase";
 

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.UserProfiles
+namespace Application.Quiz.Services
 {
-    public class GetUserProfileCommandHandler
+    public interface ICurrentIdentity
     {
-
-
+        Guid? AccountId { get; }
     }
 }

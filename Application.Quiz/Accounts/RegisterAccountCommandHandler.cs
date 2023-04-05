@@ -1,5 +1,5 @@
 ﻿using Application.Quiz.Database;
-using Domain.Quiz.Account;
+using Domain.Quiz.Accounts;
 using Domain.Quiz.Exceptions;
 using MediatR;
 using System;
@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Account
+namespace Application.Quiz.Accounts
 {
     public class RegisterAccountCommandHandler : IRequestHandler<RegisterAccountCommand>
     {
-        IRepository<AccountAggregate> _repository;
+        IRepository<Domain.Quiz.Accounts.Account> _repository;
 
-        public RegisterAccountCommandHandler(IRepository<AccountAggregate> repository)
+        public RegisterAccountCommandHandler(IRepository<Domain.Quiz.Accounts.Account> repository)
         {
             _repository = repository;
         }
@@ -35,7 +35,7 @@ namespace Application.Quiz.Account
             if (result.HasErrors)
                 throw result.ToException();
 
-            var newUser = new AccountAggregate(request.Login, request.Password);
+            var newUser = new Domain.Quiz.Accounts.Account(request.Login, request.Password);
             await _repository.InsertAsync(newUser);
             return Unit.Value;
         }

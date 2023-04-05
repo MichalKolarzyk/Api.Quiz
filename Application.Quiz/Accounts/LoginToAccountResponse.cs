@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Account
+namespace Application.Quiz.Accounts
 {
     public class LoginToAccountResponse
     {

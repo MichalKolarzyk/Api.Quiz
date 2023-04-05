@@ -1,7 +1,7 @@
 ﻿using Api.Quiz.Services;
 using Application.Quiz.Database;
 using Application.Quiz.QuizSession;
-using Domain.Quiz.UserProfile;
+using Application.Quiz.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,29 +14,26 @@ namespace Api.Quiz.Controllers.QuizSessionControllers
     public class QuizSessionController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IRepository<UserProfileAggregate> _userProfileRepository;
-        private readonly HttpContextService _httpContextService;
+        private readonly ICurrentIdentity _currentIdentity;
 
 
-        public QuizSessionController(IMediator mediator, IRepository<UserProfileAggregate> userProfileRepository, HttpContextService httpContextService)
+        public QuizSessionController(IMediator mediator, ICurrentIdentity currentIdentity)
         {
             _mediator = mediator;
-            _userProfileRepository = userProfileRepository;
-            _httpContextService = httpContextService;
+            _currentIdentity = currentIdentity;
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateQuizSessionDto createQuizSessionDto)
         {
 
-            var accountId = _httpContextService.GetAccountId();
-            var sessionOwner = await _userProfileRepository.GetAsync(p => p.AccountId == accountId);
+            var sessionOwnerId = _currentIdentity.AccountId;
 
             var createQuizSessionCommand = new CreateQuizSessionCommand
             {
                 QuizId = createQuizSessionDto.QuizId,
                 QuizPickQuestionType = createQuizSessionDto.QuizPickQuestionType,
-                SessionOwnerId = sessionOwner.Id,
+                SessionOwnerId = sessionOwnerId ?? Guid.Empty,
                 StartTime = createQuizSessionDto.StartTime,
                 TimeForQuestionInSecounds = createQuizSessionDto.TimeForQuestionInSecounds,
                 QuestionAmount = createQuizSessionDto.QuestionAmount,

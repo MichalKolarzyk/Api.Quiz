@@ -3,6 +3,7 @@ using Api.Quiz.Middelwares;
 using Api.Quiz.Services;
 using Application.Quiz;
 using Application.Quiz.QuizSession.ExtenrnalEvents;
+using Application.Quiz.Services;
 using BaseImplementationLib;
 using BaseImplementationLib.RabbitMq;
 using Domain.Quiz;
@@ -29,7 +30,8 @@ builder.Services.AddMongoRepository(settings);
 builder.Services.AddJwtTokenAuthentication(settings);
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddScoped<HttpContextService>();
+builder.Services.AddScoped<ICurrentIdentity, HttpContextService>();
+builder.Services.AddScoped<CurrentAccount>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
 //builder.Services.ReqisterMessageQueue(settings);

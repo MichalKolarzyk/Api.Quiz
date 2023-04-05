@@ -1,6 +1,6 @@
 ﻿using Application.Quiz.Authentications;
 using Application.Quiz.Database;
-using Domain.Quiz.Account;
+using Domain.Quiz.Accounts;
 using Domain.Quiz.Exceptions;
 using MediatR;
 using System;
@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Account
+namespace Application.Quiz.Accounts
 {
     internal class LoginToAccountCommandHandler : IRequestHandler<LoginToAccountCommand, LoginToAccountResponse>
     {
-        IRepository<AccountAggregate> _userRepository;
+        IRepository<Account> _userRepository;
         IAuthenticationTokenService _authenticationTokenService;
         IAuthenticationSettings _authenticationSettings;
 
-        public LoginToAccountCommandHandler(IRepository<AccountAggregate> userRepository, IAuthenticationTokenService authenticationTokenService, IAuthenticationSettings authenticationSettings)
+        public LoginToAccountCommandHandler(IRepository<Account> userRepository, IAuthenticationTokenService authenticationTokenService, IAuthenticationSettings authenticationSettings)
         {
             _userRepository = userRepository;
             _authenticationTokenService = authenticationTokenService;
