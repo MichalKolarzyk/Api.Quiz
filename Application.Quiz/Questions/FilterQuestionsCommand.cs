@@ -12,6 +12,6 @@ namespace Application.Quiz.Questions
         public int Take { get; set; }
         public int Skip { get; set; }
         public bool IsPrivate { get; set; }
-
+        public string Author { get; set; }
     }
 }

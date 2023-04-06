@@ -14,15 +14,16 @@ namespace Domain.Quiz.Exceptions
 
         public void AddError(Error error)
         {
+            if (_errors.Any(e => e.Field == error.Field))
+                return;
+
             _errors.Add(error);
         }
 
         public DomainException ToException()
         {
             if (!HasErrors)
-            {
                 throw new Exception("Result does not contain errors");
-            }
 
             return new DomainException
             {

@@ -9,6 +9,8 @@ namespace Domain.Quiz.Quizzes
 {
     public class QuizAggregate : AggregateRoot
     {
+        public QuizAggregate(){}
+
         public QuizAggregate(string name, Guid authorId)
         {
             Name = name;

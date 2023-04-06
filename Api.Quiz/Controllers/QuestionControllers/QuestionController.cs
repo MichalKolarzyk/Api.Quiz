@@ -1,5 +1,6 @@
 ﻿using Application.Quiz.Database;
 using Application.Quiz.Questions;
+using Application.Quiz.Services;
 using Domain.Quiz.Questions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,11 +15,13 @@ namespace Api.Quiz.Controllers.QuestionControllers
     {
         private readonly IMediator _mediator;
         private readonly IRepository<Question> _questionRepository;
+        private readonly ICurrentIdentity _currentIdentity;
 
-        public QuestionController(IMediator mediator, IRepository<Question> questionRepository)
+        public QuestionController(IMediator mediator, IRepository<Question> questionRepository, ICurrentIdentity currentIdentity)
         {
             _mediator = mediator;
             _questionRepository = questionRepository;
+            _currentIdentity = currentIdentity;
         }
 
         [HttpPost("create")]
@@ -48,6 +51,7 @@ namespace Api.Quiz.Controllers.QuestionControllers
                 DefaultLanugage = question.DefaultLanugage,
                 Description = question.Description,
                 IsPrivate = question.IsPrivate,
+                CanUserEdit = _currentIdentity.AccountId == question.AuthorId
             };
         }
 

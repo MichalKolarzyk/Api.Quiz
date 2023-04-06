@@ -1,12 +1,10 @@
 ﻿using MongoDB.Driver;
 using Domain.Quiz.Abstracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Application.Quiz.Database;
+using Domain.Quiz.Questions;
+using Application.Quiz.Questions;
+using Domain.Quiz.Accounts;
 
 namespace Infrastructure.Quiz.Databases
 {

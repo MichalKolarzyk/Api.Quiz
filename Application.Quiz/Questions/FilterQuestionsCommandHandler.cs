@@ -1,4 +1,5 @@
 ﻿using Application.Quiz.Database;
+using Application.Quiz.Services;
 using Domain.Quiz.Accounts;
 using Domain.Quiz.Questions;
 using MediatR;
@@ -8,38 +9,28 @@ namespace Application.Quiz.Questions
 {
     public class FilterQuestionsCommandHandler : IRequestHandler<FilterQuestionsCommand, GetQuestionsResponse>
     {
-        private readonly IRepository<Question> _questionRepository;
-        private readonly IRepository<Account> _accountRepository;
+        private readonly IAggregation<QuestionDto> _questionDtoAggregation;
+        private readonly CurrentAccount _currentAccount;
 
-        public FilterQuestionsCommandHandler(IRepository<Question> questionRepository, IRepository<Account> accountRepository)
+        public FilterQuestionsCommandHandler(IAggregation<QuestionDto> questionDtoAggregation, CurrentAccount currentAccount)
         {
-            _questionRepository = questionRepository;
-            _accountRepository = accountRepository;
+            _questionDtoAggregation = questionDtoAggregation;
+            _currentAccount = currentAccount;
         }
 
         public async Task<GetQuestionsResponse> Handle(FilterQuestionsCommand request, CancellationToken cancellationToken)
         {
-            Expression<Func<Question, bool>> predicate = q => q.IsPrivate == request.IsPrivate;
+            var user = await _currentAccount.GetCurrentAccount();
 
-            var questions = await _questionRepository.GetListAsync(predicate, request.Take, request.Skip);
-            var count = await _questionRepository.GetCount(predicate);
+            Expression<Func<QuestionDto, bool>> predicate = q => q.IsPrivate == request.IsPrivate
+                && q.Author.Contains(request.Author);
 
-            var authorsIds = questions.Select(q => q.AuthorId).Distinct().ToList();
-            var authors = await _accountRepository.GetListAsync(authorsIds);
+            var questionsDto = await _questionDtoAggregation.GetListAsync(predicate, request.Take, request.Skip);
+            var count = await _questionDtoAggregation.GetCount(predicate);
 
             return new GetQuestionsResponse()
             {
-                Questions = questions.Select(q => new QuestionDto
-                {
-                    Answers = q.Answers,
-                    CorrectAnswerIndex = q.CorrectAnswerIndex,
-                    Description = q.Description,
-                    Category = q.Category,
-                    DefaultLanugage = q.DefaultLanugage,
-                    IsPrivate = q.IsPrivate,
-                    Id = q.Id,
-                    Author = authors.FirstOrDefault(a => a.Id == q.AuthorId)?.Login ?? "",
-                }).ToList(),
+                Questions = questionsDto,
                 Count = count,
             };
         }

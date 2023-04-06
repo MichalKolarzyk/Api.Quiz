@@ -23,5 +23,7 @@ namespace Application.Quiz.Questions
         public string DefaultLanugage { get; set; } = string.Empty;
 
         public string Author { get; set; } = string.Empty;
+
+        public bool CanUserEdit { get; set; } = false;
     }
 }

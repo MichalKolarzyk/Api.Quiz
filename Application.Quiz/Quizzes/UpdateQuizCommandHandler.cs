@@ -11,9 +11,9 @@ namespace Application.Quiz.Quizzes
 {
     public class UpdateQuizCommandHandler : IRequestHandler<UpdateQuizCommand>
     {
-        private readonly IRepository<QuizAggregate> _quizRepository;
+        private readonly IRepository<Domain.Quiz.Quizzes.QuizAggregate> _quizRepository;
 
-        public UpdateQuizCommandHandler(IRepository<QuizAggregate> quizRepository)
+        public UpdateQuizCommandHandler(IRepository<Domain.Quiz.Quizzes.QuizAggregate> quizRepository)
         {
             _quizRepository = quizRepository;
         }

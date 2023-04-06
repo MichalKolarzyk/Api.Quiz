@@ -19,6 +19,10 @@ namespace Domain.Quiz.Questions
 
         public Guid AuthorId { get; set; }
 
+        public Question()
+        {
+        }
+
         public Question(string description, List<string> answers, int correctAnswerIndex, bool isPrivate, string category, string defualtLanguage, Guid authorId)
         {
             UpdateQuestion(description, answers, correctAnswerIndex, isPrivate, category, defualtLanguage);
@@ -34,6 +38,9 @@ namespace Domain.Quiz.Questions
 
             if (answers.Count < 3)
                 result.AddError(new Error("You have to provide at least 3 answers", nameof(Answers), 403));
+
+            if (answers.Any(a => string.IsNullOrWhiteSpace(a)))
+                result.AddError(new Error("Some answers are empty", nameof(Answers), 403));
 
             if (correctAnswerIndex < 0 || correctAnswerIndex >= answers.Count)
                 result.AddError(new Error("Correct answer index is not set", nameof(CorrectAnswerIndex), 403));
