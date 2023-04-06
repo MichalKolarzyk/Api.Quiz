@@ -9,18 +9,17 @@ namespace Domain.Quiz.Quizzes
 {
     public class QuizAggregate : AggregateRoot
     {
-        public QuizAggregate(Guid themeId, Guid workspaceId)
+        public QuizAggregate(string name, Guid authorId)
         {
-            Id = Guid.NewGuid();
-            ThemeId = themeId;
-            WorkspaceId = workspaceId;
+            Name = name;
+            AuthorId = authorId;
         }
 
         public List<Guid> QuestionIds { get; set; } = new();
 
-        public Guid ThemeId { get; set; }
+        public string Name { get; set; }
 
-        public Guid WorkspaceId { get; set; }
+        public Guid AuthorId { get; set; }
 
         public void UpdateQuestions(List<Guid> questionIds)
         {

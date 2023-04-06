@@ -5,5 +5,6 @@ namespace Application.Quiz.Quizzes
     public class GetQuizesResponse
     {
         public List<QuizAggregate> Quizes { get; set; } = new List<QuizAggregate>();
+        public long Count { get; set; }
     }
 }

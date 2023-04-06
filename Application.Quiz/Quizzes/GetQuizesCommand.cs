@@ -10,14 +10,8 @@ namespace Application.Quiz.Quizzes
 {
     public class GetQuizesCommand : IRequest<GetQuizesResponse>
     {
-        public Guid WorkspaceId { get; set; }
-    }
-
-    public class GetQuizesCommandValidator : AbstractValidator<GetQuizesCommand>
-    {
-        public GetQuizesCommandValidator()
-        {
-            RuleFor(x => x.WorkspaceId).NotEmpty();
-        }
+        public Guid AuthorId { get; set; }
+        public int Take { get; set; }
+        public int Skip { get; set; }
     }
 }

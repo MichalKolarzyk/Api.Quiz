@@ -20,11 +20,12 @@ namespace Application.Quiz.Quizzes
 
         public async Task<GetQuizesResponse> Handle(GetQuizesCommand request, CancellationToken cancellationToken)
         {
-            var quizes = await _repository.GetListAsync(q => q.WorkspaceId == request.WorkspaceId);
-
+            var quizes = await _repository.GetListAsync(q => true, request.Take, request.Skip);
+            var count = await _repository.GetCount(q => true);
             return new GetQuizesResponse
             {
                 Quizes = quizes,
+                Count = count,
             };
         }
     }
