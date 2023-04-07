@@ -4,7 +4,7 @@ using Domain.Quiz.Exceptions;
 using Domain.Quiz.Questions;
 using MediatR;
 
-namespace Application.Quiz.Questions
+namespace Application.Quiz.Questions.UpdateQuestion
 {
     public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionCommand>
     {

@@ -4,14 +4,14 @@ using Domain.Quiz.Quizzes;
 using MediatR;
 
 
-namespace Application.Quiz.Quizzes
+namespace Application.Quiz.Quizzes.CreateQuiz
 {
-    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, Domain.Quiz.Quizzes.QuizAggregate>
+    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, QuizAggregate>
     {
         private readonly IRepository<QuizAggregate> _quizRepository;
         private readonly ICurrentIdentity _currentIdentity;
 
-        public CreateQuizCommandHandler(IRepository<Domain.Quiz.Quizzes.QuizAggregate> quizRepository, ICurrentIdentity currentIdentity)
+        public CreateQuizCommandHandler(IRepository<QuizAggregate> quizRepository, ICurrentIdentity currentIdentity)
         {
             _quizRepository = quizRepository;
             _currentIdentity = currentIdentity;

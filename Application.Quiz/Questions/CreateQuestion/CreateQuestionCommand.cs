@@ -1,17 +1,16 @@
-﻿using Application.Quiz.Database;
+﻿using FluentValidation;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Questions
+namespace Application.Quiz.Questions.CreateQuestion
 {
-    public class QuestionDto: IAggregationModel
+    public class CreateQuestionCommand : IRequest<CreateQuestionResponse>
     {
-        public Guid Id { get; set; }
-
-        public string Description { get; set; } = string.Empty;
+        public string Question { get; set; } = string.Empty;
 
         public List<string> Answers { get; set; } = new();
 
@@ -22,9 +21,5 @@ namespace Application.Quiz.Questions
         public string Category { get; set; } = string.Empty;
 
         public string DefaultLanugage { get; set; } = string.Empty;
-
-        public string Author { get; set; } = string.Empty;
-
-        public bool CanUserEdit { get; set; } = false;
     }
 }

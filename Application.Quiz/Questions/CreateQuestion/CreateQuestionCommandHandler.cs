@@ -3,7 +3,7 @@ using Application.Quiz.Services;
 using Domain.Quiz.Questions;
 using MediatR;
 
-namespace Application.Quiz.Questions
+namespace Application.Quiz.Questions.CreateQuestion
 {
     public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, CreateQuestionResponse>
     {
@@ -18,11 +18,11 @@ namespace Application.Quiz.Questions
 
         public async Task<CreateQuestionResponse> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
         {
-            Question question = new Question(request.Question, 
-                request.Answers, 
-                request.CorrectAnswerIndex, 
-                request.IsPrivate, 
-                request.Category, 
+            Question question = new Question(request.Question,
+                request.Answers,
+                request.CorrectAnswerIndex,
+                request.IsPrivate,
+                request.Category,
                 request.DefaultLanugage,
                 _currentIdentity.AccountId ?? Guid.Empty);
 

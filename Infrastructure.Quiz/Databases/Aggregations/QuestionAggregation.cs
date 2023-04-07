@@ -1,5 +1,5 @@
-﻿using Application.Quiz.Database;
-using Application.Quiz.Questions;
+﻿using Application.Quiz.Aggregations;
+using Application.Quiz.Database;
 using Domain.Quiz.Accounts;
 using Domain.Quiz.Questions;
 using MongoDB.Bson;
@@ -13,23 +13,23 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Quiz.Databases.Aggregations
 {
-    internal class QuestionDtoAggregation : AggregationBase<QuestionDto>
+    internal class QuestionAggregation : AggregationBase<QuestionAggregationModel>
     {
         private readonly IMongoCollection<Question> _mongoCollection;
 
-        public QuestionDtoAggregation(MongoClient mongoClient, IMongoRepositorySettings mongoRepositorySettings)
+        public QuestionAggregation(MongoClient mongoClient, IMongoRepositorySettings mongoRepositorySettings)
         {
             var database = mongoClient.GetDatabase(mongoRepositorySettings.MongoDatabase);
             _mongoCollection = database.GetCollection<Question>(typeof(Question).Name);
 
         }
 
-        protected override IAggregateFluent<QuestionDto> GetAggregations()
+        protected override IAggregateFluent<QuestionAggregationModel> GetAggregations()
         {
             return _mongoCollection
                 .Aggregate()
                 .Lookup<Account, QuestionWithAuthor>(nameof(Account), nameof(Question.AuthorId), nameof(Account.Id), nameof(QuestionWithAuthor.Authors))
-                .Project(q => new QuestionDto
+                .Project(q => new QuestionAggregationModel
                 {
                     Answers = q.Answers,
                     Author = q.Authors[0].Login,
@@ -38,7 +38,8 @@ namespace Infrastructure.Quiz.Databases.Aggregations
                     DefaultLanugage = q.DefaultLanugage,
                     Description = q.Description,
                     Id = q.Id,
-                    IsPrivate = q.IsPrivate
+                    IsPrivate = q.IsPrivate,
+                    AuthorId = q.AuthorId,
                 });
         }
 

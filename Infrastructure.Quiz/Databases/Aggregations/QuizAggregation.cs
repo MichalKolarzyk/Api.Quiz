@@ -1,6 +1,6 @@
-﻿using Application.Quiz.Questions;
+﻿using Application.Aggregations;
+using Application.Quiz.Questions;
 using Application.Quiz.Quizzes;
-using Application.Quiz.Quizzes.Models;
 using Domain.Quiz.Accounts;
 using Domain.Quiz.Questions;
 using Domain.Quiz.Quizzes;
@@ -26,6 +26,7 @@ namespace Infrastructure.Quiz.Databases.Aggregations
                 .Lookup<QuizWithAuthor, QuizWithAuthor>(nameof(Question), nameof(QuizAggregate.QuestionIds), nameof(Question.Id), nameof(QuizWithAuthor.Questions))
                 .Project(q => new QuizAggregationModel
                 {
+                    Id= q.Id,
                     Author = q.Authors[0].Login,
                     Name = q.Name,
                     Questions = q.Questions,

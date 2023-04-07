@@ -1,9 +1,7 @@
-﻿using Application.Quiz.Quizzes;
+﻿using Application.Quiz.Quizzes.CreateQuiz;
 using Application.Quiz.Quizzes.GetQuiz;
 using Application.Quiz.Quizzes.GetQuizzes;
-using Domain.Quiz.Exceptions;
-using Domain.Quiz.Quizzes;
-using FluentValidation;
+using Application.Quiz.Quizzes.UpdateQuiz;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

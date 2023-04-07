@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Quizzes
+namespace Application.Quiz.Quizzes.UpdateQuiz
 {
     public class UpdateQuizCommandHandler : IRequestHandler<UpdateQuizCommand>
     {
-        private readonly IRepository<Domain.Quiz.Quizzes.QuizAggregate> _quizRepository;
+        private readonly IRepository<QuizAggregate> _quizRepository;
 
-        public UpdateQuizCommandHandler(IRepository<Domain.Quiz.Quizzes.QuizAggregate> quizRepository)
+        public UpdateQuizCommandHandler(IRepository<QuizAggregate> quizRepository)
         {
             _quizRepository = quizRepository;
         }

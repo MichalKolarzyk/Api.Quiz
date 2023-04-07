@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Quizzes.Models
+namespace Application.Aggregations
 {
     public class QuizAggregationModel : IAggregationModel
     {

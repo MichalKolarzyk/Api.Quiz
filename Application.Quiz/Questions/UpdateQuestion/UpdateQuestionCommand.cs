@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Questions
+namespace Application.Quiz.Questions.UpdateQuestion
 {
     public class UpdateQuestionCommand : IRequest
     {

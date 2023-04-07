@@ -1,8 +1,7 @@
 ﻿using Application.Quiz.Authentications;
 using Application.Quiz.Database;
 using Application.Quiz.ExtenrnalEvents;
-using Application.Quiz.Questions;
-using Application.Quiz.Quizzes.Models;
+using Application.Aggregations;
 using Application.Quiz.ReferenceItems;
 using Infrastructure.Quiz.Authentications;
 using Infrastructure.Quiz.Databases;
@@ -15,6 +14,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using System.Text;
+using Application.Quiz.Aggregations;
 
 namespace Infrastructure.Quiz
 {
@@ -30,7 +30,7 @@ namespace Infrastructure.Quiz
             serviceCollection.AddTransient<IDomainEventDispacher, DomainEventDispacher>();
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(RepositoryMongoDB<>));
 
-            serviceCollection.AddScoped<IAggregation<QuestionDto>, QuestionDtoAggregation>();
+            serviceCollection.AddScoped<IAggregation<QuestionAggregationModel>, QuestionAggregation>();
             serviceCollection.AddScoped<IAggregation<QuizAggregationModel>, QuizAggregation>();
         }
 

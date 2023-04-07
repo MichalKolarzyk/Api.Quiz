@@ -1,5 +1,4 @@
-﻿using Application.Quiz.Quizzes.Models;
-using Domain.Quiz.Quizzes;
+﻿using Domain.Quiz.Quizzes;
 
 namespace Application.Quiz.Quizzes.GetQuizzes
 {

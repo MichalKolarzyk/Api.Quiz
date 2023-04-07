@@ -1,21 +1,16 @@
-﻿using Application.Quiz.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Quiz.Quizzes.Models
+namespace Application.Quiz.Questions.GetQuestions
 {
-    public class QuizDetailAggregationModel : IAggregationModel
+    public class GetQuestionsResponse
     {
-        public Guid Id { get; set; }
-
-        public List<Question> Questions { get; set; } = new();
-
-        public string Name { get; set; } = string.Empty;
-
-        public string Author { get; set; } = string.Empty;
+        public List<Question> Questions { get; set; } = new List<Question>();
+        public long Count { get; set; }
+        public long PagesCount { get; set; }
 
         public class Question
         {

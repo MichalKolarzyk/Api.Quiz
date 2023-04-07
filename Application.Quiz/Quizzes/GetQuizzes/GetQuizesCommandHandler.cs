@@ -1,5 +1,5 @@
 ﻿using Application.Quiz.Database;
-using Application.Quiz.Quizzes.Models;
+using Application.Aggregations;
 using Domain.Quiz.Quizzes;
 using MediatR;
 using System;

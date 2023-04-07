@@ -2,9 +2,9 @@
 using FluentValidation;
 using MediatR;
 
-namespace Application.Quiz.Quizzes
+namespace Application.Quiz.Quizzes.CreateQuiz
 {
-    public class CreateQuizCommand : IRequest<Domain.Quiz.Quizzes.QuizAggregate>
+    public class CreateQuizCommand : IRequest<QuizAggregate>
     {
         public string Name { get; set; } = string.Empty;
     }
