@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Application.Quiz.Database
 {
     public interface IAggregation<T>
+        where T : IAggregationModel
     {
         Task<T> GetAsync(Expression<Func<T, bool>> expression);
         Task<List<T>> GetListAsync(Expression<Func<T, bool>> expression);

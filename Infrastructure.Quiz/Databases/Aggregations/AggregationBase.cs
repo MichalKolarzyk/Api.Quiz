@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Infrastructure.Quiz.Databases.Aggregations
 {
     internal abstract class AggregationBase<T> : IAggregation<T>
+        where T : IAggregationModel
     {
         protected abstract IAggregateFluent<T> GetAggregations();
 

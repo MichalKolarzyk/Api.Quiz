@@ -11,8 +11,8 @@ namespace Infrastructure.Quiz.Databases
     public class RepositoryMongoDB<T> : IRepository<T>
         where T : AggregateRoot
     {
-        private readonly IMongoCollection<T> _mongoCollection;
-        private readonly IDomainEventDispacher _domainEventDispacher;
+        protected readonly IDomainEventDispacher _domainEventDispacher;
+        protected readonly IMongoCollection<T> _mongoCollection;
 
         public RepositoryMongoDB(MongoClient mongoClient, IMongoRepositorySettings mongoRepositorySettings, IDomainEventDispacher domainEventDispacher)
         {

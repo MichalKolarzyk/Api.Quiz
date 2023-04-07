@@ -1,4 +1,6 @@
 ﻿using Application.Quiz.Quizzes;
+using Application.Quiz.Quizzes.GetQuiz;
+using Application.Quiz.Quizzes.GetQuizzes;
 using Domain.Quiz.Exceptions;
 using Domain.Quiz.Quizzes;
 using FluentValidation;
@@ -28,7 +30,7 @@ namespace Api.Quiz.Controllers.QuizControllers
         }
 
         [HttpPut("{quizId}/update")]
-        public async Task<IActionResult> Update([FromRoute] Guid quizId, [FromBody] UpdateQuizDto updateQuizDto)
+        public async Task<IActionResult> Update([FromRoute] Guid quizId, [FromBody] UpdateQuizBody updateQuizDto)
         {
             await _mediator.Send(new UpdateQuizCommand
             {
@@ -39,10 +41,18 @@ namespace Api.Quiz.Controllers.QuizControllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<ActionResult<GetQuizesResponse>> GetQuizes([FromQuery] GetQuizesCommand getQuizesCommand)
+        [HttpGet("{id}")]
+        public async Task<GetQuizResponse> GetQuiz([FromRoute] Guid id)
+        {
+            return await _mediator.Send(new GetQuizRequest(id));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<GetQuizesResponse>> GetQuizes([FromBody] GetQuizesCommand getQuizesCommand)
         {
             return await _mediator.Send(getQuizesCommand);
         }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using BaseImplementationLib.RabbitMq;
+﻿using Application.Quiz.Database;
+using Application.Quiz.ReferenceItems;
+using BaseImplementationLib.RabbitMq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
@@ -15,5 +17,6 @@ namespace BaseImplementationLib
             host.UseMqQueueBinds();
             host.UseMqConsumers();
         }
+       
     }
 }

@@ -2,6 +2,8 @@
 using Application.Quiz.Database;
 using Application.Quiz.ExtenrnalEvents;
 using Application.Quiz.Questions;
+using Application.Quiz.Quizzes.Models;
+using Application.Quiz.ReferenceItems;
 using Infrastructure.Quiz.Authentications;
 using Infrastructure.Quiz.Databases;
 using Infrastructure.Quiz.Databases.Aggregations;
@@ -29,6 +31,7 @@ namespace Infrastructure.Quiz
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(RepositoryMongoDB<>));
 
             serviceCollection.AddScoped<IAggregation<QuestionDto>, QuestionDtoAggregation>();
+            serviceCollection.AddScoped<IAggregation<QuizDetailAggregationModel>, QuizDetailAggregation>();
         }
 
         public static void AddJwtTokenAuthentication(this IServiceCollection serviceCollection, IAuthenticationSettings authenticationSettings)

@@ -1,5 +1,5 @@
 ﻿using Application.Quiz.Questions;
-using Application.Quiz.Quizzes;
+using Application.Quiz.Quizzes.Models;
 using Domain.Quiz.Accounts;
 using Domain.Quiz.Questions;
 using Domain.Quiz.Quizzes;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Quiz.Databases.Aggregations
 {
-    internal class QuizDtoAggregation : AggregationBase<QuizDto>
+    internal class QuizDtoAggregation : AggregationBase<QuizAggregationModel>
     {
         private readonly IMongoCollection<QuizAggregate> _mongoCollection;
 
@@ -23,17 +23,16 @@ namespace Infrastructure.Quiz.Databases.Aggregations
 
         }
 
-        protected override IAggregateFluent<QuizDto> GetAggregations()
+        protected override IAggregateFluent<QuizAggregationModel> GetAggregations()
         {
             return _mongoCollection
                 .Aggregate()
                 .Lookup<Account, QuizWithAuthor>(nameof(Account), nameof(QuizAggregate.AuthorId), nameof(Account.Id), nameof(QuizWithAuthor.Authors))
-                .Project(q => new QuizDto
+                .Project(q => new QuizAggregationModel
                 {
                     Author = q.Authors[0].Login,
                     Name = q.Name,
                     QuestionIds = q.QuestionIds,
-                    QuestionCount = q.QuestionIds.Count,
                 });
         }
 
