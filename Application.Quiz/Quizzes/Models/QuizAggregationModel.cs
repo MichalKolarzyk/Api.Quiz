@@ -1,4 +1,6 @@
 ﻿using Application.Quiz.Database;
+using Application.Quiz.Questions;
+using Domain.Quiz.Questions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace Application.Quiz.Quizzes.Models
     {
         public Guid Id { get; set; }
 
-        public List<Guid> QuestionIds { get; set; } = new();
+        public List<Question> Questions { get; set; } = new();
 
         public string Name { get; set; } = string.Empty;
 

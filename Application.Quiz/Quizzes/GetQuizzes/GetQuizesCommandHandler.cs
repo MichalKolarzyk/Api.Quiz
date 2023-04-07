@@ -13,9 +13,9 @@ namespace Application.Quiz.Quizzes.GetQuizzes
 {
     public class GetQuizesCommandHandler : IRequestHandler<GetQuizesCommand, GetQuizesResponse>
     {
-        private readonly IAggregation<QuizDetailAggregationModel> _quizAggregation;
+        private readonly IAggregation<QuizAggregationModel> _quizAggregation;
 
-        public GetQuizesCommandHandler(IAggregation<QuizDetailAggregationModel> quizAggregation)
+        public GetQuizesCommandHandler(IAggregation<QuizAggregationModel> quizAggregation)
         {
             _quizAggregation = quizAggregation;
         }
@@ -40,7 +40,7 @@ namespace Application.Quiz.Quizzes.GetQuizzes
             };
         }
 
-        public List<string> GetCategory(QuizDetailAggregationModel quiz)
+        public List<string> GetCategory(QuizAggregationModel quiz)
         {
             var groupedList = quiz.Questions.GroupBy(q => q.Category);
             return groupedList.Select(g => g.Key).Where(k => !string.IsNullOrEmpty(k)).ToList();

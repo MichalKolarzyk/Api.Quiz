@@ -1,26 +1,21 @@
 ﻿using Application.Quiz.Questions;
+using Application.Quiz.Quizzes;
 using Application.Quiz.Quizzes.Models;
 using Domain.Quiz.Accounts;
 using Domain.Quiz.Questions;
 using Domain.Quiz.Quizzes;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Quiz.Databases.Aggregations
 {
-    internal class QuizDtoAggregation : AggregationBase<QuizAggregationModel>
+    internal class QuizAggregation : AggregationBase<QuizAggregationModel>
     {
         private readonly IMongoCollection<QuizAggregate> _mongoCollection;
 
-        public QuizDtoAggregation(MongoClient mongoClient, IMongoRepositorySettings mongoRepositorySettings)
+        public QuizAggregation(MongoClient mongoClient, IMongoRepositorySettings mongoRepositorySettings)
         {
             var database = mongoClient.GetDatabase(mongoRepositorySettings.MongoDatabase);
             _mongoCollection = database.GetCollection<QuizAggregate>(nameof(QuizAggregate));
-
         }
 
         protected override IAggregateFluent<QuizAggregationModel> GetAggregations()
@@ -28,17 +23,19 @@ namespace Infrastructure.Quiz.Databases.Aggregations
             return _mongoCollection
                 .Aggregate()
                 .Lookup<Account, QuizWithAuthor>(nameof(Account), nameof(QuizAggregate.AuthorId), nameof(Account.Id), nameof(QuizWithAuthor.Authors))
+                .Lookup<QuizWithAuthor, QuizWithAuthor>(nameof(Question), nameof(QuizAggregate.QuestionIds), nameof(Question.Id), nameof(QuizWithAuthor.Questions))
                 .Project(q => new QuizAggregationModel
                 {
                     Author = q.Authors[0].Login,
                     Name = q.Name,
-                    QuestionIds = q.QuestionIds,
+                    Questions = q.Questions,
                 });
         }
 
-        private class QuizWithAuthor : QuizAggregate 
+        private class QuizWithAuthor : QuizAggregate
         {
-            public List<Account> Authors { get; set; } = new List<Account>();
+            public List<Account> Authors = new List<Account>();
+            public List<Question> Questions { get; set; } = new List<Question>();
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Application.Quiz.Quizzes.GetQuiz
 {
     internal class GetQuizRequestHandler : IRequestHandler<GetQuizRequest, GetQuizResponse>
     {
-        private readonly IAggregation<QuizDetailAggregationModel> _quizAggregation;
+        private readonly IAggregation<QuizAggregationModel> _quizAggregation;
 
-        public GetQuizRequestHandler(IAggregation<QuizDetailAggregationModel> quizAggregation)
+        public GetQuizRequestHandler(IAggregation<QuizAggregationModel> quizAggregation)
         {
             _quizAggregation = quizAggregation;
         }

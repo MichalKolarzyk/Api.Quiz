@@ -31,7 +31,7 @@ namespace Infrastructure.Quiz
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(RepositoryMongoDB<>));
 
             serviceCollection.AddScoped<IAggregation<QuestionDto>, QuestionDtoAggregation>();
-            serviceCollection.AddScoped<IAggregation<QuizDetailAggregationModel>, QuizDetailAggregation>();
+            serviceCollection.AddScoped<IAggregation<QuizAggregationModel>, QuizAggregation>();
         }
 
         public static void AddJwtTokenAuthentication(this IServiceCollection serviceCollection, IAuthenticationSettings authenticationSettings)
