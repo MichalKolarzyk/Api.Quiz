@@ -8,6 +8,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using Application.Quiz.Extensions;
 
 namespace Application.Quiz.Quizzes.GetQuizzes
 {
@@ -22,8 +24,13 @@ namespace Application.Quiz.Quizzes.GetQuizzes
 
         public async Task<GetQuizesResponse> Handle(GetQuizesCommand request, CancellationToken cancellationToken)
         {
-            var quizzesAggregation = await _quizAggregation.GetListAsync(q => true, request.Take, request.Skip);
-            var count = await _quizAggregation.GetCount(q => true);
+            Expression<Func<QuizAggregationModel, bool>> predicate = q => true;
+
+            if(request.Author != null)
+                predicate.AndAlso(q => q.Author.StartsWith(request.Author));
+
+            var quizzesAggregation = await _quizAggregation.GetListAsync(predicate, request.Take, request.Skip);
+            var count = await _quizAggregation.GetCount(predicate);
             var quizzes = quizzesAggregation.Select(a => new GetQuizesResponse.Quiz
             {
                 Id = a.Id,

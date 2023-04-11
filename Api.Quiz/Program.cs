@@ -12,6 +12,7 @@ using Domain.Quiz;
 using FluentValidation;
 using Infrastructure.Quiz;
 using Infrastructure.Quiz.Databases;
+using Infrastructure.Quiz.Databases.InMemoryRepositories;
 using Infrastructure.Quiz.Hubs;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
@@ -32,6 +33,8 @@ builder.Services.AddMediatR(AssemblyApiQuiz.Assembly, AssemblyApplicationQuiz.As
 builder.Services.AddValidatorsFromAssemblyContaining<AssemblyApplicationQuiz>();
 
 builder.Services.AddMongoRepository(settings);
+builder.Services.AddScoped<IRepository<ReferenceItem>, ReferenceListInMemoryRepository>();
+
 builder.Services.AddJwtTokenAuthentication(settings);
 builder.Services.AddHttpContextAccessor();
 

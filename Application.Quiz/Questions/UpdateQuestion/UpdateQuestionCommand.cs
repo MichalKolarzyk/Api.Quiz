@@ -24,13 +24,4 @@ namespace Application.Quiz.Questions.UpdateQuestion
 
         public string DefaultLanugage { get; set; } = string.Empty;
     }
-
-    public class UpdateQuestionCommandValidator : AbstractValidator<UpdateQuestionCommand>
-    {
-        public UpdateQuestionCommandValidator()
-        {
-            RuleFor(x => x.CorrectAnswerIndex)
-                .LessThan(x => x.Answers.Count);
-        }
-    }
 }

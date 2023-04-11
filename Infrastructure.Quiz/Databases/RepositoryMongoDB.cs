@@ -54,8 +54,6 @@ namespace Infrastructure.Quiz.Databases
             var filterDef = new FilterDefinitionBuilder<T>();
             var filter = filterDef.In(x => x.Id, ids);
             return await _mongoCollection.Find(filter).ToListAsync();
-
-            //return await _mongoCollection.Find(a => ids.Contains(a.Id)).ToListAsync();
         }
 
         public async Task<long> GetCount(Expression<Func<T, bool>> expression)

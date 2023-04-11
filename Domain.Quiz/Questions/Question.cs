@@ -36,6 +36,9 @@ namespace Domain.Quiz.Questions
             if (string.IsNullOrEmpty(description))
                 result.AddError(new Error("You have to provide question", nameof(Description), 403));
 
+            if (string.IsNullOrEmpty(category))
+                result.AddError(new Error("Category is not set", nameof(Category), 403));
+
             if (answers.Count < 3)
                 result.AddError(new Error("You have to provide at least 3 answers", nameof(Answers), 403));
 
@@ -44,6 +47,7 @@ namespace Domain.Quiz.Questions
 
             if (correctAnswerIndex < 0 || correctAnswerIndex >= answers.Count)
                 result.AddError(new Error("Correct answer index is not set", nameof(CorrectAnswerIndex), 403));
+
 
             if (result.HasErrors)
                 throw result.ToException();

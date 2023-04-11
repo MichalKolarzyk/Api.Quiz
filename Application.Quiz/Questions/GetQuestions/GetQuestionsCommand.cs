@@ -11,7 +11,8 @@ namespace Application.Quiz.Questions.GetQuestions
     {
         public int Take { get; set; }
         public int Skip { get; set; }
-        public bool IsPrivate { get; set; }
-        public string Author { get; set; } = string.Empty;
+        public bool? IsPrivate { get; set; }
+        public string? Author { get; set; } = string.Empty;
+        public string? Category { get; set; } = string.Empty;
     }
 }
