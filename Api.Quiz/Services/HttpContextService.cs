@@ -1,4 +1,5 @@
 ﻿using Application.Quiz.Services;
+using Domain.Quiz.Accounts;
 using System.Security.Claims;
 
 namespace Api.Quiz.Services

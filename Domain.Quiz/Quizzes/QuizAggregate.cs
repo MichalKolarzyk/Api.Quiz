@@ -19,9 +19,9 @@ namespace Domain.Quiz.Quizzes
 
         public List<Guid> QuestionIds { get; set; } = new();
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public Guid AuthorId { get; set; }
+        public Guid AuthorId { get; set; } = Guid.Empty;
 
         public void UpdateQuestions(List<Guid> questionIds)
         {

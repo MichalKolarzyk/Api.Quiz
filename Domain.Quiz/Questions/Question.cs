@@ -48,7 +48,6 @@ namespace Domain.Quiz.Questions
             if (correctAnswerIndex < 0 || correctAnswerIndex >= answers.Count)
                 result.AddError(new Error("Correct answer index is not set", nameof(CorrectAnswerIndex), 403));
 
-
             if (result.HasErrors)
                 throw result.ToException();
 

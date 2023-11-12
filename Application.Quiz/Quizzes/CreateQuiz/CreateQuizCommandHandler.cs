@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Quiz.Quizzes.CreateQuiz
 {
-    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, QuizAggregate>
+    public class CreateQuizCommandHandler : IRequestHandler<CreateQuizCommand, CreateQuizResponse>
     {
         private readonly IRepository<QuizAggregate> _quizRepository;
         private readonly ICurrentIdentity _currentIdentity;
@@ -17,13 +17,16 @@ namespace Application.Quiz.Quizzes.CreateQuiz
             _currentIdentity = currentIdentity;
         }
 
-        public async Task<QuizAggregate> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
+        public async Task<CreateQuizResponse> Handle(CreateQuizCommand request, CancellationToken cancellationToken)
         {
             var quiz = new QuizAggregate(request.Name, _currentIdentity.AccountId ?? Guid.Empty);
 
             var quizAggregate = await _quizRepository.InsertAsync(quiz);
 
-            return quizAggregate;
+            return new CreateQuizResponse
+            {
+                Id = quizAggregate.Id,
+            };
         }
     }
 }

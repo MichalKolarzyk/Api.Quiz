@@ -20,6 +20,7 @@ namespace Application.Quiz.Questions.UpdateQuestion
         public async Task<Unit> Handle(UpdateQuestionCommand request, CancellationToken cancellationToken)
         {
             Question question = await _questionRepository.GetAsync(q => q.Id == request.Id);
+
             if (_currentIdentity.AccountId != question.AuthorId)
                 throw Result.DomainException(new Error("User is not an autohor of the question.", "", 403));
 

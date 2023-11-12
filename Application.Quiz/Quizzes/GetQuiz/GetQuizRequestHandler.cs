@@ -26,10 +26,14 @@ namespace Application.Quiz.Quizzes.GetQuiz
             {
                 Author = quizAggregation.Author,
                 Name = quizAggregation.Name,
-                //Questions = quizAggregation.Questions.Select(q => new GetQuizResponse.Question
-                //{
-                //    Author = 
-                //}),
+                Questions = quizAggregation.Questions.Select(q => new GetQuizResponse.Question
+                {
+                    Id= q.Id,
+                    Category= q.Category,
+                    Author = "",
+                    DefaultLanugage=q.DefaultLanugage,
+                    Description = q.Description,
+                }).ToList(),
             };
         }
     }

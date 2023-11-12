@@ -21,10 +21,9 @@ namespace Api.Quiz.Controllers.QuizControllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateQuiz([FromBody] CreateQuizCommand createQuizCommand)
+        public async Task<CreateQuizResponse> CreateQuiz([FromBody] CreateQuizCommand createQuizCommand)
         {
-            var createdQuiz = await _mediator.Send(createQuizCommand);
-            return Ok(createdQuiz.Id);
+            return await _mediator.Send(createQuizCommand);
         }
 
         [HttpPut("{quizId}/update")]

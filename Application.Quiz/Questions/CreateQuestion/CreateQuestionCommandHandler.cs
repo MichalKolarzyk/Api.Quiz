@@ -24,7 +24,7 @@ namespace Application.Quiz.Questions.CreateQuestion
         {
             var categories = await _referenceItemsRepository.GetListAsync(i => i.Key == "Category");
 
-            if(!categories.Any(c => c.Value == request.Category))
+            if(!string.IsNullOrEmpty(request.Category) && !categories.Any(c => c.Value == request.Category))
                 throw Result.DomainException(new Error("Category is not correct", "Category", 403));
 
             Question question = new Question(request.Question,

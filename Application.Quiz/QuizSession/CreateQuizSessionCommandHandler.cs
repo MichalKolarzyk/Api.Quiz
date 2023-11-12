@@ -14,7 +14,7 @@ namespace Application.Quiz.QuizSession
     public class CreateQuizSessionCommandHandler : IRequestHandler<CreateQuizSessionCommand>
     {
         private readonly IRepository<QuizSessionAggregate> _quizSessionRepository;
-        private readonly IRepository<Domain.Quiz.Quizzes.QuizAggregate> _quizRepository;
+        private readonly IRepository<QuizAggregate> _quizRepository;
         //private readonly ISessionComunicator _sessionComunicator;
 
         public CreateQuizSessionCommandHandler(IRepository<QuizSessionAggregate> quizSessionRepository, IRepository<Domain.Quiz.Quizzes.QuizAggregate> quizRepository)

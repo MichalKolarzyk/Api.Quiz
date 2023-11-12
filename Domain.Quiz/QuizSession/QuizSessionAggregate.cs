@@ -23,7 +23,7 @@ namespace Domain.Quiz.QuizSession
         public PickQuestionType QuizPickQuestionType { get; set; }
         public List<QuizSessionQuesion> QuizSessionQuesions { get; set; }
 
-        public QuizSessionAggregate(Quizzes.QuizAggregate quizAggregate, Guid sessionOwnerId, DateTime startTime, int timeForQuestionInSecounds, int questionsAmount, PickQuestionType quizPickQuestionType)
+        public QuizSessionAggregate(QuizAggregate quizAggregate, Guid sessionOwnerId, DateTime startTime, int timeForQuestionInSecounds, int questionsAmount, PickQuestionType quizPickQuestionType)
         {
             QuizId = quizAggregate.Id;
             SessionOwnerId = sessionOwnerId;

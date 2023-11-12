@@ -7,15 +7,11 @@ using Application.Quiz.QuizSession.ExtenrnalEvents;
 using Application.Quiz.ReferenceItems;
 using Application.Quiz.Services;
 using BaseImplementationLib;
-using BaseImplementationLib.RabbitMq;
 using Domain.Quiz;
 using FluentValidation;
 using Infrastructure.Quiz;
-using Infrastructure.Quiz.Databases;
 using Infrastructure.Quiz.Databases.InMemoryRepositories;
-using Infrastructure.Quiz.Hubs;
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
 
 var settings = new Settings();
 
